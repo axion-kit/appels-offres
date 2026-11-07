@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+vitest.json
+pw.json
+.drizzle/
+vente/remplis/
+/planche/
+_site/

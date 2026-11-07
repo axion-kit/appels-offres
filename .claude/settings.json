@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install --frozen-lockfile)",
+      "Bash(pnpm tsc*)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm test*)",
+      "Bash(pnpm build)",
+      "Bash(pnpm e2e)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push -u origin HEAD)"
+    ],
+    "deny": [
+      "Bash(gh secret*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)",
+      "Bash(git push *--force*)",
+      "Bash(git push *+*)",
+      "Bash(git push *:*)",
+      "Bash(git push *--delete*)",
+      "Bash(git push *main*)",
+      "Bash(pnpm dlx*)",
+      "Bash(pnpm exec*)",
+      "Bash(pnpm add*)",
+      "Bash(npx*)",
+      "Bash(rm -rf*)",
+      "Bash(rm *-*r*)",
+      "Read(./.env*)"
+    ]
+  }
+}

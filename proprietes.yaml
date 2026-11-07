@@ -1,0 +1,10 @@
+# Réglages de l'outil, lus côté serveur.
+#
+# inscription : qui peut créer un compte
+#   fermee         = seul l'administrateur crée les comptes
+#   sur_invitation = un lien d'invitation (un seul usage, durée limitée) est nécessaire
+#   libre          = la page /inscription est publique
+inscription: sur_invitation
+#
+# Durée de l'essai offert à chaque nouvel espace, en jours (0 = pas de limite de durée).
+essai_jours: 30

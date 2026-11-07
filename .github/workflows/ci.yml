@@ -1,0 +1,113 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Liste blanche des fichiers suivis par git
+        run: |
+          test -d src || exit 1
+          test -d e2e || exit 1
+          racine='package\.json|pnpm-lock\.yaml|tsconfig\.json|next\.config\.ts|next-env\.d\.ts|vitest\.config\.ts|playwright\.config\.ts|eslint\.config\.mjs|\.gitignore|\.gitattributes|README\.md|CLAUDE\.md|METHODE\.md|REPRENDRE\.md|SPEC\.md|\.kit-version|proprietes\.yaml|renovate\.json|drizzle\.config\.ts'
+          autres=$(git ls-files | grep -vxE "(src|e2e|public|\.github|\.claude)/.*|docs/[^/]+\.md|pilotage/(fiches|journal)/[^/]+\.md|outils/avancement/(lib|generer|avancement\.test)\.mjs|${racine}" || true)
+          if [ -n "$autres" ]; then
+            echo "$autres"
+            echo "Fichier suivi hors de la liste blanche (src, e2e, public, docs/*.md, .github, .claude et fichiers racine connus) : interdit."
+            exit 1
+          fi
+          hors=$(git ls-files src e2e | grep -vE '\.(ts|tsx|css)$' || true)
+          if [ -n "$hors" ]; then
+            echo "$hors"
+            echo "Fichier inattendu dans src ou e2e : interdit."
+            exit 1
+          fi
+          pub=$(git ls-files public | grep -viE '\.(png|jpe?g|svg|ico|webp|avif|gif|txt|woff2?)$' || true)
+          if [ -n "$pub" ]; then
+            echo "$pub"
+            echo "Seuls des fichiers statiques (images, polices, txt) sont permis dans public : interdit."
+            exit 1
+          fi
+          dts=$(git ls-files | grep -E '\.d\.(ts|mts|cts)$' | grep -vxF next-env.d.ts || true)
+          if [ -n "$dts" ]; then
+            echo "$dts"
+            echo "Fichier .d.ts, .d.mts ou .d.cts interdit (sauf next-env.d.ts)."
+            exit 1
+          fi
+      - name: Interdire les commentaires, appels et mots qui coupent les contrôles
+        run: |
+          test -d src || exit 1
+          test -d e2e || exit 1
+          if git ls-files -z -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.mjs' '*.cjs' '*.mts' '*.cts' | xargs -0 grep -niE '\b(skip|only|todo|fixme|fails?|skipIf|runIf)\b|gitleaks:allow|eslint-disable|@ts-(nocheck|ignore|expect-error)|(v8|c8|istanbul) ignore|node:coverage[[:space:]]+(ignore|disable)|declare[[:space:]]+(module|global)'; then
+            echo "Mot, commentaire ou appel qui coupe un contrôle : interdit."
+            exit 1
+          fi
+      - name: Garde de périmètre de la fiche (pull request seulement)
+        if: github.event_name == 'pull_request'
+        env:
+          BRANCHE: ${{ github.head_ref }}
+          BASE: origin/${{ github.base_ref }}
+        run: |
+          node --test ".github/scripts/*.test.mjs"
+          # La garde vient de la BASE : une PR ne peut pas réécrire son propre contrôle.
+          garde="$RUNNER_TEMP/garde"
+          mkdir -p "$garde"
+          for f in fiches perimetre lint-fiches; do
+            # Ces scripts existent sur main : s'ils manquent de la base, on échoue, sans repli sur ceux de la PR.
+            if ! git show "$BASE:.github/scripts/$f.mjs" > "$garde/$f.mjs" 2>/dev/null; then
+              echo "Garde : .github/scripts/$f.mjs est absent de la base ($BASE). Contrôle impossible : arrêt."
+              exit 1
+            fi
+            echo "Garde : $f.mjs pris de la base ($BASE)."
+          done
+          node "$garde/perimetre.mjs" "$BRANCHE" "$BASE"
+          node "$garde/lint-fiches.mjs"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm tsc --noEmit
+      - run: pnpm exec eslint . --max-warnings=0
+      - name: Tests de la page d'avancement
+        run: node --test outils/avancement/avancement.test.mjs
+      - name: Tests unitaires, avec contrôle du résultat
+        run: |
+          pnpm test --reporter=default --reporter=json --outputFile=vitest.json
+          jq -e '.numPendingTests==0 and .numTodoTests==0 and .numTotalTests>=1' vitest.json
+      - run: pnpm build
+      - name: Tests de bout en bout, avec contrôle du résultat
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: pw.json
+        run: |
+          pnpm e2e --forbid-only --reporter=line,json
+          jq -e '.stats.skipped==0 and .stats.unexpected==0 and .stats.flaky==0 and .stats.expected>=1 and ([.. | objects | select(has("expectedStatus")) | .expectedStatus] | all(. == "passed"))' pw.json
+      - name: Recherche de secrets (gitleaks 8.30.1, somme vérifiée)
+        run: |
+          test ! -e .gitleaksignore
+          if git ls-files | grep -E '(^|/)\.gitleaksignore$' | grep -vxF .github/.gitleaksignore; then
+            echo "Fichier .gitleaksignore interdit."
+            exit 1
+          fi
+          curl -sSfL -o gl.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gl.tgz" | sha256sum -c -
+          tar -xzf gl.tgz gitleaks
+          ./gitleaks git --no-banner --ignore-gitleaks-allow --redact -v --config .github/gitleaks.toml --gitleaks-ignore-path .github/ .
