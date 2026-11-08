@@ -1,5 +1,9 @@
 name: ci
 
+# PR socle P3 (proposition verif50 / P7) : même contrôles que le ci.yml du kit, répartis en jobs parallèles
+# pour rester sous 15 minutes par job quand les 191 fiches seront faites. Aucun contrôle retiré ni assoupli.
+# Le job final « verifier » résume les trois autres ; main n'exige que le contrôle « portier », qui lit la conclusion du run entier.
+
 on:
   pull_request:
   push:
@@ -13,19 +17,17 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  verifier:
+  gardes:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
-          cache: pnpm
       - name: Liste blanche des fichiers suivis par git
         run: |
           test -d src || exit 1
@@ -85,6 +87,35 @@ jobs:
           done
           node "$garde/perimetre.mjs" "$BRANCHE" "$BASE"
           node "$garde/lint-fiches.mjs"
+      - name: Recherche de secrets (gitleaks 8.30.1, somme vérifiée)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test ! -e .gitleaksignore
+          if git ls-files | grep -E '(^|/)\.gitleaksignore$' | grep -vxF .github/.gitleaksignore; then
+            echo "Fichier .gitleaksignore interdit."
+            exit 1
+          fi
+          # Téléchargement avec reprises, puis repli par l API GitHub (même fichier, même somme vérifiée ensuite) : le CDN des releases a rendu des 504 le 08/11/2026.
+          curl -sSfL --retry 5 --retry-delay 15 --retry-all-errors -o gl.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+            || curl -sSfL --retry 3 --retry-delay 15 --retry-all-errors -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/octet-stream" -o gl.tgz https://api.github.com/repos/gitleaks/gitleaks/releases/assets/378332058
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gl.tgz" | sha256sum -c -
+          tar -xzf gl.tgz gitleaks
+          ./gitleaks git --no-banner --ignore-gitleaks-allow --redact -v --config .github/gitleaks.toml --gitleaks-ignore-path .github/ .
+
+  unitaires:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm tsc --noEmit
@@ -95,21 +126,50 @@ jobs:
         run: |
           pnpm test --reporter=default --reporter=json --outputFile=vitest.json
           jq -e '.numPendingTests==0 and .numTodoTests==0 and .numTotalTests>=1' vitest.json
+      - name: Jeu d'or avec la fausse IA (aucun appel réel, aucune clé)
+        env:
+          IA_EVAL_MODE: ""
+        run: pnpm ia:eval
+
+  bout-en-bout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        partie: [1, 2]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm build
-      - name: Tests de bout en bout, avec contrôle du résultat
+      - name: Tests de bout en bout (moitié ${{ matrix.partie }} sur 2), avec contrôle du résultat
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: pw.json
+          PARTIE: ${{ matrix.partie }}
         run: |
-          pnpm e2e --forbid-only --reporter=line,json
+          pnpm e2e --forbid-only --reporter=line,json --shard="$PARTIE/2"
           jq -e '.stats.skipped==0 and .stats.unexpected==0 and .stats.flaky==0 and .stats.expected>=1 and ([.. | objects | select(has("expectedStatus")) | .expectedStatus] | all(. == "passed"))' pw.json
-      - name: Recherche de secrets (gitleaks 8.30.1, somme vérifiée)
+
+  verifier:
+    # Un job requis « sauté » compte comme réussi pour GitHub : ce job tourne toujours et échoue si un seul job a échoué.
+    if: always()
+    needs: [gardes, unitaires, bout-en-bout]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Tous les jobs sont verts
+        env:
+          GARDES: ${{ needs.gardes.result }}
+          UNITAIRES: ${{ needs.unitaires.result }}
+          BOUT_EN_BOUT: ${{ needs.bout-en-bout.result }}
         run: |
-          test ! -e .gitleaksignore
-          if git ls-files | grep -E '(^|/)\.gitleaksignore$' | grep -vxF .github/.gitleaksignore; then
-            echo "Fichier .gitleaksignore interdit."
-            exit 1
-          fi
-          curl -sSfL -o gl.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
-          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gl.tgz" | sha256sum -c -
-          tar -xzf gl.tgz gitleaks
-          ./gitleaks git --no-banner --ignore-gitleaks-allow --redact -v --config .github/gitleaks.toml --gitleaks-ignore-path .github/ .
+          echo "gardes=$GARDES unitaires=$UNITAIRES bout-en-bout=$BOUT_EN_BOUT"
+          test "$GARDES" = success && test "$UNITAIRES" = success && test "$BOUT_EN_BOUT" = success
