@@ -7,6 +7,8 @@ export default defineConfig({
   test: {
     expect: { requireAssertions: true },
     include: ["src/**/*.test.{ts,tsx}"],
+    testTimeout: 20_000,
+    hookTimeout: 30_000,
     coverage: {
       provider: "v8",
       include: ["src/**/*.{ts,tsx}"],

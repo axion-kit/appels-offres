@@ -26,7 +26,14 @@ Réponds toujours en français. Garde le contexte court : lis seulement ce qui s
 - Maquettes d'abord : écrans déclarés dans `src/design/ecrans.ts`, `pnpm planche`, validation du responsable avant le code (voir `METHODE.md` 2 bis).
 - Couleurs, espacements, tailles : seulement dans `src/design/jetons.ts`.
 - Mobile d'abord. Aucun mot technique visible (pas de « erreur 500 », « API », « token »…). Français simple.
-- Barre latérale foncée, accent orange `#e8730c`.
+- Deux jeux de jetons dans `src/design/jetons.ts`, rien en dehors : « console » par défaut (paquet de design de la console : clair, aucun bleu, rupture 720 px, cartes au rayon du composant `Carte` de la console (12 px), Manrope et Fraunces) et « v23 » en option (bleu `#1a4dd9`, menu `#132a4f`, Manrope, Inter, Inconsolata). Le choix entre les deux n'est pas tranché : ne jamais en supprimer un.
+
+## Console des automatisations
+- L'outil est un module de la console (comptes Keycloak, schéma `a_appels_offres`, stockage `appels-offres/`, IA par la passerelle, tâches par l'exécuteur). On code contre des interfaces et le FAUX serveur de la console, jamais contre la console réelle, jamais avec des données réelles.
+- Le contrat C4 est figé dans `src/lib/console/contrat-c4/`, et la copie du kit d'écriture des modules dans `src/lib/console/contrat/` : elles se régénèrent par le directeur, jamais à la main, jamais par une fiche. Les signatures des ports et le modèle de données sont publics : `docs/console-ports.md`, `docs/modele-donnees.md`.
+- Versions alignées sur la console (Next 16.4.3, React 19.3.1, Playwright 1.64.1, Node 22, pnpm 10.28.0) : aucune montée de version sans la console.
+- Garder `src/middleware.ts` ; ne jamais créer `src/proxy.ts`.
+- Mode choisi par `AO_MODE` : `autonome` par défaut tant que l'ADR « application embarquée » n'est pas acceptée par la console ; toute fonction exposée reste derrière un interrupteur fermé par défaut.
 
 ## Si tu es bloqué
 Écris la question dans `REPRENDRE.md`, passe `ETAT: ATTENTE-WILL` et arrête-toi.
