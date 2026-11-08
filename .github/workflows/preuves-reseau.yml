@@ -1,0 +1,43 @@
+name: preuves-reseau
+
+# Preuves réseau des fiches L00 (geste 8 bis du démarrage) : lancé À LA MAIN seulement, par le directeur.
+# Lecture publique, sans compte, sans clé, sans secret ; au plus 5 requêtes espacées d'1 s ; résumé sans corps brut.
+# Aucun effet sur la CI ni sur le portier (jamais sur pull_request ni sur push).
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Source publique à lire
+        required: true
+        type: choice
+        options:
+          - boamp
+          - ted
+          - place
+          - robots
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preuves-reseau
+  cancel-in-progress: false
+
+jobs:
+  lire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Lecture publique de la source, résumé sans corps brut
+        env:
+          SOURCE: ${{ inputs.source }}
+        run: node .github/preuves/lire.mjs "$SOURCE"
