@@ -86,13 +86,17 @@ jobs:
           node "$garde/perimetre.mjs" "$BRANCHE" "$BASE"
           node "$garde/lint-fiches.mjs"
       - name: Recherche de secrets (gitleaks 8.30.1, somme vérifiée)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           test ! -e .gitleaksignore
           if git ls-files | grep -E '(^|/)\.gitleaksignore$' | grep -vxF .github/.gitleaksignore; then
             echo "Fichier .gitleaksignore interdit."
             exit 1
           fi
-          curl -sSfL -o gl.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          # Téléchargement avec reprises, puis repli par l API GitHub (même fichier, même somme vérifiée ensuite) : le CDN des releases a rendu des 504 le 08/11/2026.
+          curl -sSfL --retry 5 --retry-delay 15 --retry-all-errors -o gl.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+            || curl -sSfL --retry 3 --retry-delay 15 --retry-all-errors -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/octet-stream" -o gl.tgz https://api.github.com/repos/gitleaks/gitleaks/releases/assets/378332058
           echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gl.tgz" | sha256sum -c -
           tar -xzf gl.tgz gitleaks
           ./gitleaks git --no-banner --ignore-gitleaks-allow --redact -v --config .github/gitleaks.toml --gitleaks-ignore-path .github/ .
