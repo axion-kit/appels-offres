@@ -65,6 +65,8 @@ jobs:
             echo "Mot, commentaire ou appel qui coupe un contrôle : interdit."
             exit 1
           fi
+      - name: Cliquet des titres des règles de fer
+        run: node .github/scripts/regles-de-fer-titres.mjs
       - name: Garde de périmètre de la fiche (pull request seulement)
         if: github.event_name == 'pull_request'
         env:
