@@ -12,7 +12,6 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
     // Base en mémoire et courriels gardés en mémoire : réservé aux parcours automatiques.
-    // Outil Appels d'offres : faux services seulement, aucun appel réel, aucune donnée réelle.
     env: {
       COMPTES_BASE: "memoire",
       COMPTES_INSCRIPTION: "libre",
@@ -20,10 +19,6 @@ export default defineConfig({
       COMPTES_BOITE_TEST: "oui",
       COMPTES_DELAI_MIN_MS: "1500",
       BETTER_AUTH_URL: "http://localhost:3100",
-      AO_IA: "fausse",
-      AO_CONSOLE: "fausse",
-      AO_HORLOGE: "2026-11-02T08:00:00+01:00",
-      AO_RESEAU_EXTERIEUR: "bloque",
     },
   },
   use: { baseURL: "http://localhost:3100" },
