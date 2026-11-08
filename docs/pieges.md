@@ -17,3 +17,6 @@
 | Avis de relecture perdu | Branche d'avis supprimée trop tôt | Relancer la relecture du groupe |
 | Vague sans relecteurs | Sans avis, rien n'est fusionné et les PR attendent | Chaque vague d'auteurs part avec sa vague de relecteurs |
 | Coût qui explose | Contexte long × nombreux tours | Une tâche par session, lire par extraits, Opus pour concevoir et relire, Sonnet pour le reste |
+
+- Tests d'interface sous `src/` : `renderToStaticMarkup` seulement (aucun jsdom) ; un geste au clic se teste en e2e.
+- Si `tsconfig.json` ou `next-env.d.ts` paraissent modifiés après `pnpm build` : `git checkout -- tsconfig.json next-env.d.ts` (jamais commités).

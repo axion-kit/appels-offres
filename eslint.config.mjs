@@ -1,11 +1,28 @@
-import { FlatCompat } from "@eslint/eslintrc";
-
-const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
+import coreWebVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
 
 const config = [
   { ignores: [".next/**", "coverage/**", "node_modules/**", "next-env.d.ts", "playwright-report/**", "test-results/**"] },
   { linterOptions: { noInlineConfig: true, reportUnusedDisableDirectives: "error" } },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...coreWebVitals,
+  ...nextTypescript,
+  {
+    // R249 (fer 19) : un texte reçu s'affiche comme du texte, jamais comme du HTML brut.
+    // Seule exception : la feuille des jetons de src/app/layout.tsx. Les tests sont exclus ici (leur bloc a ses propres règles) :
+    // la garde L01-T71 (src/lib/securite/html-brut.test.ts) couvre aussi le texte brut.
+    files: ["src/**/*.{ts,tsx}"],
+    ignores: ["src/app/layout.tsx", "**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}"],
+    rules: {
+      "no-restricted-syntax": [
+        "error",
+        { selector: "JSXAttribute[name.name='dangerouslySetInnerHTML']", message: "R249 : HTML brut interdit ; afficher le texte reçu par le composant TexteRecu (src/composants/texte-recu.tsx)." },
+        { selector: "Property[key.name='dangerouslySetInnerHTML']", message: "R249 : HTML brut interdit (dangerouslySetInnerHTML passé en objet)." },
+        { selector: "AssignmentExpression > MemberExpression.left[property.name=/^(innerHTML|outerHTML)$/]", message: "R249 : affectation à innerHTML ou outerHTML interdite." },
+        { selector: "CallExpression[callee.property.name=/^(insertAdjacentHTML|createContextualFragment)$/]", message: "R249 : insertion de HTML brut interdite (insertAdjacentHTML, createContextualFragment)." },
+        { selector: "CallExpression[callee.object.name='document'][callee.property.name=/^(write|writeln)$/]", message: "R249 : document.write interdit." },
+      ],
+    },
+  },
   {
     files: ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}", "e2e/**/*.{ts,tsx}"],
     rules: {
