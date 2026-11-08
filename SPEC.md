@@ -1,10 +1,10 @@
-Version 2 du 08/11/2026, alignée sur le cahier v1.7, la maquette v23 (commit harmonie-v23-final-OK) et l'ordre d'architecture du 08/11/2026 : l'outil est un module de la console des automatisations.
+Version 2 du 08/11/2026, alignée sur le cahier v1.7, la maquette v23 et l'ordre d'architecture du 08/11/2026 : l'outil est un module de la console des automatisations.
 
 # SPEC : outil « Appels d'offres »
 
 Ce document suit le gabarit `SPEC.md` du kit (sections 1 à 12). Il est destiné au dépôt public : il ne contient aucun nom de client, de salarié ni de ville, et aucun prix. Les décisions du responsable du 07/11 et du 08/11/2026 sont appliquées, avec leur date ; une valeur provisoire est écrite « valeur provisoire, datée et sourcée » et rangée dans une table de paramètres. Ce qui n'a pas été essayé est marqué **À PROUVER EN LOT 0** ; le MVP ne le promet pas et prévoit un repli à la main.
 
-**Comment lire ce document.** Les numéros `EX-…` (entre parenthèses ou dans les lignes « Cahier : ») et les lignes « Cahier » sont des numéros de traçabilité vers un document interne, le cahier des charges ; les scripts de traçabilité les lisent, c'est pourquoi ils restent. Tout le texte utile de ce document interne est recopié dans les R (Étant donné, Quand, Alors et compléments) : l'auteur d'une fiche n'a jamais à le lire. Les numéros `D-nn` et `W-nn` sont des décisions datées, expliquées chacune en une phrase dans la section « Décisions datées » à la fin de ce document. Les « [fer n] » renvoient aux règles de fer du §1.
+**Comment lire ce document.** Les numéros `EX-…` (entre parenthèses ou dans les lignes « Cahier : ») et les lignes « Cahier » sont des numéros de traçabilité vers un document interne, le cahier des charges ; les scripts de traçabilité les lisent, c'est pourquoi ils restent. Tout le texte utile de ce document interne est recopié dans les R (Étant donné, Quand, Alors et compléments). Les numéros R sont des identifiants stables, rangés par domaine et non dans l'ordre de lecture : R211 à R250 ont été ajoutées en v2 et v3 au milieu des domaines. Dix-huit règles n'ont pas de numéro EX parce qu'elles viennent du kit, de la console ou des décisions du 08/11/2026 et non du cahier (R112, R188, R189, R200, R201, R206, R207, R210, R213, R222, R223, R230, R231, R232, R236, R244, R249, R250) : leur ligne « Cahier » dit « à reporter dans le cahier v1.8 » et donne l'origine : l'auteur d'une fiche n'a jamais à le lire. Les numéros `D-nn` et `W-nn` sont des décisions datées, expliquées chacune en une phrase dans la section « Décisions datées » à la fin de ce document. Les « [fer n] » renvoient aux règles de fer du §1.
 
 ## Changements v2 (08/11/2026)
 
@@ -25,7 +25,7 @@ Ce document suit le gabarit `SPEC.md` du kit (sections 1 à 12). Il est destiné
 - **Corrections du tour 2 de la seconde vérification (08/11/2026)** : paragraphe « Comment lire » en tête et section « Décisions datées » (une phrase par décision `D-nn` et `W-nn` citée) ; non-levée des règles de fer jouée dans 9 contextes (4 rôles du client, 4 rôles d'Axion, administrateur du portail, équipe de la console, mots « forcer » ou « lever », route HTTP, tâche planifiée et agent d'IA, réglage le plus permissif, ligne de commande), écrits au §1 et rappelés dans R178 et R204 ; R des titres « [fer n] » ajoutées au §1 (R9, R30, R44, R130, R174, R180, R227, R249) ; R187 : les 5 gestes de trace permis en lecture seule sont écrits un par un et portés par la garde du socle, même liste pendant l'arrêt d'urgence (R209) ; R7 : liste des mots de promesse définie (table du code `vocabulaire.ts`) et relecture par une personne avant chaque livraison ; R30 : jamais présenté comme un prix ; R204 : chaque agent rattaché à son client ; R180 : sessions (30 minutes sans geste, 8 heures au plus, identifiant changé à la connexion, cookie HttpOnly, Secure, SameSite, écriture d'un autre site refusée) ; R181 : complément EX-EQ-33 aligné sur l'écart du mode autonome ; R235 : accord hors Union seulement avec un document signé du client déposé ; R209 : rôle Technique (Axion) ; second complément EX-AC-89 de R2 (rôles d'Axion faux) retiré ; montants d'essai de EX-MR-05 retirés (seul montant écrit : le seuil de R40) ; base légale de chaque traitement ajoutée au registre du §6 (NON VÉRIFIÉ, source officielle à citer).
 - **Corrections du tour 2 de l'audit C (08/11/2026, correcteur final)** : §1 fer 6 et R57 : passer une pièce exigée par le règlement en « Facultative », ou reculer sa date de validité sans nouveau fichier, est refusé et tracé ; seule issue « Cette pièce est fournie autrement » ; aucun rôle ne le fait (N-1) ; R187 et R209 : la garde de lecture seule relit côté serveur le geste, ses tables et la date de confirmation en base, jamais une date venue de la requête (N-2) ; R3 : un écrasement de contenu est une destruction, nouvelle version obligatoire, aucune réécriture de l'entrepôt sous la même clé (N-5) ; R235 : qui dépose le document signé, et seconde personne d'Axion qui le vérifie avant l'ouverture, tracée (C-16) ; §1 : déclaration `reglesDeFer` obligatoire dans chaque route, refus de toute route d'écriture en Lecture seule, câblage des gardes de session prouvé (C-02, N-3, C-13) ; §1 : non-levée reprise par L07-T43, L07-T47, L07-T48 et L07-T49.
 - **Consolidation finale de la seconde vérification (08/11/2026)** : contrôles Q-01 à Q-36 définis (section 4 bis) ; table des paramètres datée (section 4 ter) et ligne « Paramètre » dans R37, R74, R110, R111, R148, R149, R156, R167, R170, R179, R183, R185, R195, R200, R214 (seconde lecture différée selon W-11 : le lendemain, jamais moins d'1 heure), R228 ; R179 précise l'entité et la revue des accès (livrées par L02-T10) ; R183 nomme les six étapes de la mise en route.
-- Numérotation : R1 à R250 sans trou, plus R-C1 à R-C6. Correspondance des demandes : `_verif2/INTEGRATION-correspondance.md`.
+- Numérotation : R1 à R250, uniques et sans trou, rangées par domaine (identifiants stables, pas un ordre de lecture ; R211 à R250 ajoutées en v2 et v3), plus R-C1 à R-C6.
 
 ## 1. Contexte
 
@@ -66,7 +66,7 @@ Le cahier des charges détaillé (version 1.7, 624 exigences numérotées EX-…
   4. **Le service juridique interne d'une entreprise** : relit les clauses signalées et le dossier avant l'envoi, sans rien envoyer ; a besoin de l'Historique et des versions. Rôle : Lecture seule ou Personne qui prépare, avec la fonction « relit avant l'envoi » (R214).
   5. **L'acheteur ou le service achats d'un groupe** : suit les réponses de plusieurs entités, chacune avec son compte (R237) ; regarde les volumes, les dates et les exports ; ne confirme pas l'envoi d'une entité dont il n'est pas habilité. Rôle : Lecture seule dans chaque compte, ou Responsable du compte de son entité.
   Chaque profil peut agrandir le texte, utiliser le clavier seul ou un lecteur d'écran (R19 à R22).
-- **Limites d'accueil héritées de la console** : clients professionnels seulement ; aucun client dont l'activité relève de la santé (règle C-491 de la console), tant que le responsable n'a pas obtenu d'exception.
+- **Limites d'accueil héritées de la console** : clients professionnels seulement ; aucun client dont l'activité relève de la santé (règle d'accueil de la console), tant que le responsable n'a pas obtenu d'exception.
 - **L'équipe Axion** : met en service les clients, tient le registre des sources, surveille la dépense d'IA, aide sans accès libre aux données (R182, R204). Rôles : Aide aux clients, Technique, Sources, Surveillance de l'IA (D-02, décision du 07/11/2026).
 - **Appareils** : téléphone (360 à 430 px, debout et couché), tablette, ordinateur portable (1280 à 1366 px). Les écrans nouveaux sont dessinés téléphone d'abord ; la base existante reste adaptative (D-61, R19).
 
@@ -172,7 +172,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
   4. base jetable du test mensuel de restauration ;
   5. fichiers temporaires créés pendant une conversion, dans le dossier temporaire du processus, jamais rangés dans l'entrepôt ; le texte extrait rangé est gardé ;
   6. destruction de la clé de période qui protège l'adresse réseau dans le journal de la console, 6 mois après la fin de sa période (W-15, décision du 08/11/2026 ; paramètre daté et sourcé), ou sur demande d'effacement : la valeur gardée ne peut plus être reliée à une adresse, la ligne du journal est gardée ; en mode autonome, l'adresse gardée à part est vidée au même terme. Les journaux techniques de l'hébergeur sont hors de l'outil.
-  7. état technique et détail des exécutions de l'exécuteur de la console (purge de la base de l'exécuteur, ADR 0101 ; détail des exécutions retiré après 90 jours), qui ne contient que des identifiants et des codes, jamais une donnée du module ; une tâche du module n'y écrit rien d'autre (test de L01-T48). L'effacement exceptionnel d'un client par la console (sur décision écrite, double validation) n'est pas un effacement technique : il relève de R4 et de l'exception de fin de contrat (DCA-14).
+  7. état technique et détail des exécutions de l'exécuteur de la console (purge de la base de l'exécuteur, règle de purge de la console ; détail des exécutions retiré après 90 jours), qui ne contient que des identifiants et des codes, jamais une donnée du module ; une tâche du module n'y écrit rien d'autre (test de L01-T48). L'effacement exceptionnel d'un client par la console (sur demande écrite du client seulement, R4 et fer 10, avec double validation) n'est pas un effacement technique : il relève de R4 et de l'exception de fin de contrat (demande n° 14 faite à la console).
   Aucune donnée de client, aucune pièce, aucun original, aucune version, aucun dossier, aucune annonce, aucun accusé, aucune ligne du journal d'audit n'en fait partie : ceux-là s'archivent, et ne s'effacent que par la demande de suppression définitive faite à la main (R4).
 
 ### R4 : une suppression définitive se fait à la main, hors de l'outil
@@ -1363,7 +1363,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 - **Alors** la mention « Anonymat exigé (règlement p. …) » s'affiche ; le nommage, les propriétés et l'auteur des fichiers ne contiennent ni le nom ni le numéro de l'entreprise (point bloquant sinon) ; l'enveloppe ou le fichier d'identification séparé demandé par le règlement est une pièce à part ; la prime et le jury sont seulement signalés avec leur source.
 - Version : v2 pour l'écran complet ; le minimum du MVP est dans R92.
 - État : à faire
-- Cahier : aucune (manque du cahier, à reporter dans le cahier v1.8)
+- Cahier : à reporter dans le cahier v1.8 ; origine : manque du cahier, à reporter dans le cahier v1.8
 - Écran : Un dossier › Préparation ; Un dossier › Validation
 
 ### R86 : valider ne fait rien partir
@@ -1735,7 +1735,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 - Version : mvp : l'outil reste utilisable, protège.
 - État : à faire
 - Lot : L05
-- Cahier : aucune (case du kit « Panne du fournisseur IA »)
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « Panne du fournisseur IA »
 - Écran : Un dossier › Préparation
 
 ### R113 : sorties de l'IA vérifiées
@@ -2754,7 +2754,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 - Version : mvp : c'est le rangement de la console (une organisation = un client) ; une offre se dépose au nom d'une seule entité juridique ; garde l'isolation (R181).
 - État : à faire
 - Lot : L01 (L02 pour la fiche entreprise)
-- Cahier : aucune (décision du 08/11/2026 : tous types d'entreprises) ; EX-SI-R-11 (aucun mélange entre clients)
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du 08/11/2026 : tous types d'entreprises) ; EX-SI-R-11 (aucun mélange entre clients
 - Écran : Mise en route ; Mon entreprise › Identité ; coque (nom de la société active)
 
 ### R213 : lien « groupe » entre comptes et choix de la société active
@@ -2763,7 +2763,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 - **Alors** elle choisit la société active dans une liste qui ne montre que les sociétés où elle a un rôle ; la session ne porte jamais deux sociétés à la fois ; changer de société ferme la vue de la précédente et s'inscrit au journal des deux comptes ; le lien « groupe » est posé par Axion avec l'accord écrit du responsable de chaque compte, et se retire de la même façon ; ce lien ne partage aucune donnée par lui-même ; copier un texte ou une référence d'une société à l'autre est un geste d'une personne qui a un rôle dans les deux, montré « copié depuis [société], le jj/mm/aaaa », jamais fait par l'outil ni par l'IA ; une vue de synthèse du groupe, en lecture seule (nombre de dossiers par étape et dates limites, sans contenu), n'est montrée qu'à une personne qui a un rôle dans chaque société comptée.
 - Version : v2 : dépend d'une demande à la console (une personne dans plusieurs organisations, même demande que la comptabilité) qui n'a pas de réponse ; au MVP, R237 suffit à répondre.
 - État : à faire
-- Cahier : aucune (décision du 08/11/2026 : tous types d'entreprises)
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du 08/11/2026 : tous types d'entreprises
 - Écran : Connexion (choix de la société) ; coque
 
 ### R225 : accès limité à certains dossiers ou établissements
@@ -2831,7 +2831,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 ### R187 : fin d'essai, suspension, fin d'abonnement
 - **Étant donné** un espace dont l'essai ou l'abonnement est fini, ou suspendu
 - **Quand** la personne ouvre l'outil
-- **Alors** elle lit une phrase simple (R-C5 du kit pour l'essai) ; la veille et les tâches de l'IA s'arrêtent, les comptes déclarés dans Mes comptes passent à l'état « en pause » (l'outil n'en détient aucun secret ; les connexions de la console sont retirées par la console à la mise à l'écart) ; le client garde un accès en lecture et l'export de toutes ses données ; rien n'est effacé ; en lecture seule, restent permis, parce que ce sont des traces et non des envois : importer et contrôler un accusé de réception (R132, R242), noter un dépôt fait en dehors de l'outil (R211), déclarer « J'ai envoyé moi-même » pour une confirmation donnée avant le passage en lecture seule (R119), importer un courrier de l'acheteur (R227) et noter un résultat (R143) ; tout le reste est fermé : aucune confirmation d'envoi, aucune préparation, aucune IA, aucune veille ; chaque geste permis est inscrit au journal ; un envoi suivant demandé par un courrier (pièces de l'attributaire) est nommé dans le bandeau avec sa date limite ; l'accès en lecture seule et l'export complet durent un délai annoncé ; avant la date de fin, un bandeau sur chaque page dit la date, propose « Préparer mon export » et nomme les dossiers dont la date limite tombe après la fin ; aucune suppression n'est proposée ; l'état (essai, actif, facture en attente, lecture seule, suspendu, fin, inconnu ; table de `docs/console-ports.md` §6.1) est lu dans l'état du contrat exposé par la console, jamais décidé par l'outil ; un état de version ancienne est ignoré ; sans date de fin connue, aucun bandeau de fin n'est inventé ; après la fin, l'accès en lecture seule dure 90 jours et l'export reste possible à tout moment (D-36) ; ensuite le contenu de l'outil est gardé en archive gelée 10 ans (D-72, R194) ; la destruction de fin de contrat de la console ne s'applique pas à l'outil : c'est une exception demandée à la console ; tant qu'elle n'est pas accordée, l'outil n'est pas vendu en mode module ; la garde de lecture seule du socle porte elle-même la liste fermée des 5 gestes de trace permis en lecture seule, et aucun autre : (1) importer et contrôler un accusé de réception (R132, R242) ; (2) noter un dépôt fait en dehors de l'outil (R211) ; (3) déclarer « J'ai envoyé moi-même » pour une confirmation donnée avant le passage en lecture seule (R119), une confirmation donnée après étant refusée ; (4) importer un courrier de l'acheteur (R227) ; (5) noter un résultat (R143) ; aucun module ne contourne cette garde ni ne recopie la liste ; la garde ne croit pas l'appelant : elle relit elle-même, côté serveur, le geste et sa date ; la date de confirmation est lue en base à partir de l'identifiant de la confirmation, jamais d'un paramètre de la requête ; chaque geste de trace est lié à la liste fermée des tables qu'il peut écrire, et une écriture hors de ces tables est refusée et inscrite au journal (`acces_refuse`) ; chacun des 5 gestes a son propre test, courrier (R227) et résultat (R143) compris ; tests « R187 — [fer 2] une date de confirmation venue de la requête est ignorée, la date de la base fait foi » et « R187 — un geste déclaré qui écrit hors de ses tables est refusé » ; la même liste et la même garde valent pendant l'arrêt d'urgence (R209) ; une suppression définitive se fait seulement sur demande écrite du client (R4) ; en mode autonome seulement, l'essai et la lecture seule sont tenus par la Vue Axion ; Essai et « Facture en attente » (délai de grâce de la console) : tout est permis, avec un bandeau sans montant ; « Lecture seule » (fin d'essai sans abonnement, pause pour impayé confirmée par l'équipe), « Suspendu » et « Contrat terminé » : lire, exporter et les gestes de trace listés plus haut seulement ; en mode module, cette lecture seule suppose la demande DCA-14 (a) livrée (aujourd'hui une base gelée n'est plus lisible) ; tant qu'elle ne l'est pas, l'export de la console est la seule voie et Mes données le dit : « Après la fin du contrat, vos données sont remises par l'export ; la lecture dans l'outil n'est pas encore ouverte. » ; un gel pour litige suspend la mise à l'écart et la fin de la lecture seule (R4) ; en mode autonome, le geste « L'essai devient abonnement » est fait dans la Vue Axion par une personne d'Axion, tracé ; en mode module, c'est le Hub de la console qui change l'état du contrat.
+- **Alors** elle lit une phrase simple (R-C5 du kit pour l'essai) ; la veille et les tâches de l'IA s'arrêtent, les comptes déclarés dans Mes comptes passent à l'état « en pause » (l'outil n'en détient aucun secret ; les connexions de la console sont retirées par la console à la mise à l'écart) ; le client garde un accès en lecture et l'export de toutes ses données ; rien n'est effacé ; en lecture seule, restent permis, parce que ce sont des traces et non des envois : importer et contrôler un accusé de réception (R132, R242), noter un dépôt fait en dehors de l'outil (R211), déclarer « J'ai envoyé moi-même » pour une confirmation donnée avant le passage en lecture seule (R119), importer un courrier de l'acheteur (R227) et noter un résultat (R143) ; tout le reste est fermé : aucune confirmation d'envoi, aucune préparation, aucune IA, aucune veille ; chaque geste permis est inscrit au journal ; un envoi suivant demandé par un courrier (pièces de l'attributaire) est nommé dans le bandeau avec sa date limite ; l'accès en lecture seule et l'export complet durent un délai annoncé ; avant la date de fin, un bandeau sur chaque page dit la date, propose « Préparer mon export » et nomme les dossiers dont la date limite tombe après la fin ; aucune suppression n'est proposée ; l'état (essai, actif, facture en attente, lecture seule, suspendu, fin, inconnu ; table de `docs/console-ports.md` §6.1) est lu dans l'état du contrat exposé par la console, jamais décidé par l'outil ; un état de version ancienne est ignoré ; sans date de fin connue, aucun bandeau de fin n'est inventé ; après la fin, l'accès en lecture seule dure 90 jours et l'export reste possible à tout moment (D-36) ; ensuite le contenu de l'outil est gardé en archive gelée 10 ans (D-72, R194) ; la destruction de fin de contrat de la console ne s'applique pas à l'outil : c'est une exception demandée à la console ; tant qu'elle n'est pas accordée, l'outil n'est pas vendu en mode module ; la garde de lecture seule du socle porte elle-même la liste fermée des 5 gestes de trace permis en lecture seule, et aucun autre : (1) importer et contrôler un accusé de réception (R132, R242) ; (2) noter un dépôt fait en dehors de l'outil (R211) ; (3) déclarer « J'ai envoyé moi-même » pour une confirmation donnée avant le passage en lecture seule (R119), une confirmation donnée après étant refusée ; (4) importer un courrier de l'acheteur (R227) ; (5) noter un résultat (R143) ; aucun module ne contourne cette garde ni ne recopie la liste ; la garde ne croit pas l'appelant : elle relit elle-même, côté serveur, le geste et sa date ; la date de confirmation est lue en base à partir de l'identifiant de la confirmation, jamais d'un paramètre de la requête ; chaque geste de trace est lié à la liste fermée des tables qu'il peut écrire, et une écriture hors de ces tables est refusée et inscrite au journal (`acces_refuse`) ; chacun des 5 gestes a son propre test, courrier (R227) et résultat (R143) compris ; tests « R187 — [fer 2] une date de confirmation venue de la requête est ignorée, la date de la base fait foi » et « R187 — un geste déclaré qui écrit hors de ses tables est refusé » ; la même liste et la même garde valent pendant l'arrêt d'urgence (R209) ; une suppression définitive se fait seulement sur demande écrite du client (R4) ; en mode autonome seulement, l'essai et la lecture seule sont tenus par la Vue Axion ; Essai et « Facture en attente » (délai de grâce de la console) : tout est permis, avec un bandeau sans montant ; « Lecture seule » (fin d'essai sans abonnement, pause pour impayé confirmée par l'équipe), « Suspendu » et « Contrat terminé » : lire, exporter et les gestes de trace listés plus haut seulement ; en mode module, cette lecture seule suppose la demande demande n° 14 faite à la console (a) livrée (aujourd'hui une base gelée n'est plus lisible) ; tant qu'elle ne l'est pas, l'export de la console est la seule voie et Mes données le dit : « Après la fin du contrat, vos données sont remises par l'export ; la lecture dans l'outil n'est pas encore ouverte. » ; un gel pour litige suspend la mise à l'écart et la fin de la lecture seule (R4) ; en mode autonome, le geste « L'essai devient abonnement » est fait dans la Vue Axion par une personne d'Axion, tracé ; en mode module, c'est le Hub de la console qui change l'état du contrat.
 - **Complément du cahier (EX-SI-C-06)** : Avant la date de fin, le bandeau dit par exemple « Votre abonnement se termine le 31/12. Vous pouvez télécharger toutes vos données dès maintenant : [Préparer mon export]. 2 réponses sont en cours (heure limite le 15/12 et le 08/01). » ; le contenu de l'export est listé en mots simples (bibliothèque, textes approuvés, dossiers déposés, accusés, journal du client) en formats ouverts ; à la date de fin, la veille et toute tâche IA s'arrêtent, les connexions (jetons officiels) sont révoquées et tout est archivé ; l'outil ne supprime jamais les données le jour de la fin ni à l'échéance du délai, ne retient jamais les données pour forcer un renouvellement, ne dépose ni n'envoie rien après la fin et ne garde aucun jeton actif ; en recette, un client fictif en fin de contrat obtient un export complet, relu par une personne et comparé à la liste écrite, puis une lecture seule avec connexions révoquées et aucune tâche lancée.
 - **Complément du cahier (EX-EC-06)** : Recette : dans l'état « fin d'abonnement » d'essai, le bandeau est présent sur chaque page, le bouton « Préparer mon export » existe et le bandeau ne contient aucune forme du mot « supprimer ».
 - Version : mvp : réversibilité, protège.
@@ -2847,7 +2847,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 - Version : mvp : règle du kit.
 - État : à faire
 - Lot : L07
-- Cahier : aucune (règle du kit, docs/avancement.md)
+- Cahier : à reporter dans le cahier v1.8 ; origine : règle du kit, docs/avancement.md
 - Écran : Sans écran (page d'avancement du kit)
 
 ### R189 : place dans la console Axion
@@ -2857,7 +2857,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 - Version : mvp : ordre d'architecture du responsable du 08/11/2026 (01 h 00), qui remplace la ligne « autonome d'abord » de 00 h 40.
 - État : à faire
 - Lot : L07
-- Cahier : aucune (ordre d'architecture du responsable du 08/11/2026)
+- Cahier : à reporter dans le cahier v1.8 ; origine : ordre d'architecture du responsable du 08/11/2026
 - Écran : Toutes les pages (zone `/appels-offres/**` du portail) ; Vue Axion
 
 ### Domaine : Module de la console
@@ -2871,7 +2871,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : ordre d'architecture du responsable du 08/11/2026 (module de la console, mode autonome en repli derrière des adaptateurs).
 - État : à faire
 - Lot : L01
-- Cahier : aucune (ordre d'architecture du responsable du 08/11/2026)
+- Cahier : à reporter dans le cahier v1.8 ; origine : ordre d'architecture du responsable du 08/11/2026
 - Écran : Sans écran (serveur)
 
 ### R231 : faux serveur de la console
@@ -2881,7 +2881,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : ordre d'architecture du responsable du 08/11/2026 ; on ne développe jamais contre la console réelle.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (ordre d'architecture du responsable du 08/11/2026)
+- Cahier : à reporter dans le cahier v1.8 ; origine : ordre d'architecture du responsable du 08/11/2026
 - Écran : Sans écran (essais)
 
 ### R232 : module C4 de la console
@@ -2891,7 +2891,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : ordre d'architecture du responsable du 08/11/2026 ; règles de fer [fer 1] et [fer 2] côté console.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (ordre d'architecture du responsable du 08/11/2026)
+- Cahier : à reporter dans le cahier v1.8 ; origine : ordre d'architecture du responsable du 08/11/2026
 - Écran : Sans écran (serveur)
 
 ### R226 : la console fait tourner la veille et l'IA
@@ -2911,7 +2911,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : ordre d'architecture du responsable du 08/11/2026 (journal chaîné 0042 de la console réutilisé au lieu d'un journal propre).
 - État : à faire
 - Lot : L01
-- Cahier : aucune (ordre d'architecture du responsable du 08/11/2026) ; EX-RG-30
+- Cahier : EX-RG-30 ; complément à reporter dans le cahier v1.8 ; origine : ordre d'architecture du responsable du 08/11/2026
 - Écran : Un dossier › Historique ; Mes données
 
 ### R235 : IA ouverte compte par compte
@@ -2932,7 +2932,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : règle de fer [fer 7] et ordre d'architecture du responsable du 08/11/2026 (migrations de la console).
 - État : à faire
 - Lot : L01
-- Cahier : aucune (ordre d'architecture du responsable du 08/11/2026)
+- Cahier : à reporter dans le cahier v1.8 ; origine : ordre d'architecture du responsable du 08/11/2026
 - Écran : Sans écran (serveur)
 
 ### Domaine : Exploitation
@@ -3001,7 +3001,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 ### R195 : sauvegarde et restauration
 - **Étant donné** les données de tous les clients
 - **Quand** la sauvegarde tourne
-- **Alors** en mode module, ce sont les sauvegardes de la console (bases : dump de nuit par client, chiffré par la clé du client ; fichiers : sauvegarde demandée à la console, DCA-16 ; aucun client réel en mode module tant que la restauration d'un client avec ses fichiers n'est pas prouvée) : chiffrées avant leur départ, hors du serveur, dans une autre région, en ajout seul, une sauvegarde par client restaurable seule, et l'outil vérifie seulement que sa version de schéma est relue après restauration ; en mode autonome, elle est chiffrée, hors du serveur et hors de l'hébergeur ; la restauration d'un seul client est à prouver en L01 (avant la première vente) ; une restauration complète d'un client de test est essayée avant la première mise en service puis chaque mois dans une base jetable ; une alerte part si la sauvegarde ou l'essai ne tourne pas ; chaque essai de restauration mesure le temps de remise en état, vérifie qu'aucun contenu d'un autre client n'est restauré et donne un procès-verbal daté ; la rotation D-07 (quotidiennes 35 jours, hebdomadaires 12 semaines, mensuelles 12 mois, décision du 08/11/2026) est demandée à la console ; tant qu'elle ne l'a pas acceptée, les valeurs de la console (30 quotidiennes, 12 mensuelles) sont écrites dans la table des paramètres et dans Mes données ; les fichiers du client (préfixe `appels-offres/`) sont sauvegardés et restaurés avec sa base ; tant que la console ne l'a pas prouvé, aucun client réel n'est ouvert ; une restauration d'un client se fait dans une base à part ; on en reprend des éléments comme nouvelles versions, jamais en remplaçant des données plus récentes (R3).
+- **Alors** en mode module, ce sont les sauvegardes de la console (bases : dump de nuit par client, chiffré par la clé du client ; fichiers : sauvegarde demandée à la console, demande n° 16 faite à la console ; aucun client réel en mode module tant que la restauration d'un client avec ses fichiers n'est pas prouvée) : chiffrées avant leur départ, hors du serveur, dans une autre région, en ajout seul, une sauvegarde par client restaurable seule, et l'outil vérifie seulement que sa version de schéma est relue après restauration ; en mode autonome, elle est chiffrée, hors du serveur et hors de l'hébergeur ; la restauration d'un seul client est à prouver en L01 (avant la première vente) ; une restauration complète d'un client de test est essayée avant la première mise en service puis chaque mois dans une base jetable ; une alerte part si la sauvegarde ou l'essai ne tourne pas ; chaque essai de restauration mesure le temps de remise en état, vérifie qu'aucun contenu d'un autre client n'est restauré et donne un procès-verbal daté ; la rotation D-07 (quotidiennes 35 jours, hebdomadaires 12 semaines, mensuelles 12 mois, décision du 08/11/2026) est demandée à la console ; tant qu'elle ne l'a pas acceptée, les valeurs de la console (30 quotidiennes, 12 mensuelles) sont écrites dans la table des paramètres et dans Mes données ; les fichiers du client (préfixe `appels-offres/`) sont sauvegardés et restaurés avec sa base ; tant que la console ne l'a pas prouvé, aucun client réel n'est ouvert ; une restauration d'un client se fait dans une base à part ; on en reprend des éléments comme nouvelles versions, jamais en remplaçant des données plus récentes (R3).
 - **Complément du cahier (EX-RG-36)** : Les sauvegardes sont régulières, chiffrées, par client et dans un lieu distinct de la production ; la liste des sauvegardes d'un client de test est consultable par l'équipe technique ; le remplacement des plus anciennes sauvegardes par de nouvelles est une rotation technique, pas une suppression de données de travail du client (D-07, décision du 08/11/2026).
 - **Complément du cahier (EX-RG-37)** : Le test de restauration mesure le temps de remise en état et vérifie qu'aucun contenu d'un autre client n'est restauré ; un procès-verbal daté est gardé.
 - Version : mvp : protège.
@@ -3073,7 +3073,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Paramètre (08/11/2026) : plafonds (`LIMITES_PASSAGE`) : confirmations d'envoi 10 par heure et par personne ; exports 5 par jour et par compte (`EXPORTS_PAR_JOUR`, repris par L07-T08) ; e-mails envoyés par l'outil 200 par jour et par compte ; valeur provisoire, datée du 08/11/2026, rangée dans la table de paramètres (section 4 ter), à confirmer par mesure.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (case du kit « Limites d'essais et d'abus »)
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « Limites d'essais et d'abus »
 - Écran : Sans écran (serveur)
 
 ### R201 : e-mails de l'outil qui arrivent
@@ -3083,7 +3083,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : sans rappels qui arrivent, des dates sont ratées.
 - État : à faire
 - Lot : L07
-- Cahier : aucune (case du kit « E-mails »)
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « E-mails »
 - Écran : Sans écran (e-mails)
 
 ### R202 : chaque interdiction a son essai
@@ -3152,7 +3152,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : protège.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (case du kit « Tâches planifiées »)
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « Tâches planifiées »
 - Écran : Sans écran (serveur) ; Vue Axion
 
 ### R207 : montants gardés exactement
@@ -3162,7 +3162,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : un prix faux fait perdre un marché, protège.
 - État : à faire
 - Lot : L04
-- Cahier : aucune (case du kit « Montants en centimes entiers »)
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « Montants en centimes entiers »
 - Écran : Un dossier › Préparation › Prix ; Mes mots de recherche
 
 ### R208 : un fichier en quarantaine n'est jamais supprimé par l'outil
@@ -3192,7 +3192,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : permet de voir une panne tout de suite.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (case du kit « Tâches planifiées »)
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « Tâches planifiées »
 - Écran : Sans écran (serveur)
 
 ### R212 : traçabilité mesurée par un programme
@@ -3222,11 +3222,11 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 ### R222 : quotas par compte
 - **Étant donné** les quotas d'un compte : ceux que la console fixe (place en base, poids des fichiers) et ceux de l'outil (personnes, dossiers actifs, sources suivies, mots de recherche, pièces par dossier, poids d'un dossier) ; plafond d'IA à part (R110)
 - **Quand** l'usage approche ou atteint un quota
-- **Alors** à 70 % (seuil de la console en mode module, valeur du fichier de paramètres sinon), le responsable du compte et Axion sont prévenus (« Votre compte utilise 70 % de la place prévue pour vos fichiers. ») ; à 100 %, seuls les nouveaux ajouts concernés sont refusés avec une phrase qui dit quoi faire (« Contactez Axion pour agrandir votre compte. ») ; tout le travail déjà fait reste lisible, modifiable et exportable ; un dossier dont l'heure limite est dans moins de 3 jours ouvrés n'est jamais bloqué par un quota (fichiers, pièces par dossier, dossiers actifs : l'ajout passe et Axion est alerté) ; « Retenir et commencer » une annonce dont l'heure limite est à moins de 3 jours ouvrés reste permis quand le quota de dossiers actifs est atteint ; en mode module, tant que l'exception demandée à la console (DCA-19) n'est pas livrée, un ajout refusé pour un dossier à moins de 3 jours ouvrés affiche « La place de votre compte est pleine : ce fichier n'a pas été ajouté. Axion est prévenu tout de suite. Si l'heure limite approche, déposez directement sur le site de l'acheteur. » et Axion est alerté à la minute ; aucun quota ne déclenche une suppression ; les valeurs viennent de la console en mode module (l'outil les lit, ne les fixe pas) et d'un fichier de paramètres daté sinon ; le nombre de personnes du compte est un quota de l'outil ; aucun prix n'est affiché.
+- **Alors** à 70 % (seuil de la console en mode module, valeur du fichier de paramètres sinon), le responsable du compte et Axion sont prévenus (« Votre compte utilise 70 % de la place prévue pour vos fichiers. ») ; à 100 %, seuls les nouveaux ajouts concernés sont refusés avec une phrase qui dit quoi faire (« Contactez Axion pour agrandir votre compte. ») ; tout le travail déjà fait reste lisible, modifiable et exportable ; un dossier dont l'heure limite est dans moins de 3 jours ouvrés n'est jamais bloqué par un quota (fichiers, pièces par dossier, dossiers actifs : l'ajout passe et Axion est alerté) ; « Retenir et commencer » une annonce dont l'heure limite est à moins de 3 jours ouvrés reste permis quand le quota de dossiers actifs est atteint ; en mode module, tant que l'exception demandée à la console (demande n° 19 faite à la console) n'est pas livrée, un ajout refusé pour un dossier à moins de 3 jours ouvrés affiche « La place de votre compte est pleine : ce fichier n'a pas été ajouté. Axion est prévenu tout de suite. Si l'heure limite approche, déposez directement sur le site de l'acheteur. » et Axion est alerté à la minute ; aucun quota ne déclenche une suppression ; les valeurs viennent de la console en mode module (l'outil les lit, ne les fixe pas) et d'un fichier de paramètres daté sinon ; le nombre de personnes du compte est un quota de l'outil ; aucun prix n'est affiché.
 - Version : mvp : un gros compte remplit vite le stockage ; un refus net vaut mieux qu'une panne.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (case du kit « Limites d'essais et d'abus » ; console A-247, C-188)
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « Limites d'essais et d'abus » ; règles de la console sur les essais et les abus
 - Écran : Mes données ; Vue Axion
 
 ### R223 : temps de réponse cibles
@@ -3236,7 +3236,7 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : sans cible chiffrée, rien ne se mesure.
 - État : à faire
 - Lot : L07
-- Cahier : aucune (cibles de temps de réponse ajoutées par verif50 le 08/11/2026, à reporter dans le cahier v1.8)
+- Cahier : à reporter dans le cahier v1.8 ; origine : cibles de temps de réponse ajoutées par la vérification du 08/11/2026, à reporter dans le cahier v1.8
 - Écran : Sans écran (serveur)
 
 ### R249 : le texte reçu s'affiche comme du texte
@@ -3246,17 +3246,17 @@ Ces exigences portent l'ordre d'architecture du responsable du 08/11/2026 : l'ou
 - Version : mvp : sécurité ; en mode module, l'outil ne pose pas lui-même la politique de sécurité du contenu, la page doit donc se protéger seule.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (constat verif2 du 08/11/2026, catalogue Q4 cas 9 ; règle voisine de R5)
+- Cahier : à reporter dans le cahier v1.8 ; origine : constat de la seconde vérification du 08/11/2026, catalogue Q4 cas 9 ; règle voisine de R5
 - Écran : L'annonce ; Veille ; Un dossier › Échanges ; Ajouter un appel d'offres
 
 ### R250 : un réglage ne vide jamais une protection
 - **Étant donné** un paramètre réglable qui protège : validité de l'écran de confirmation (R118, R120), seuil du mode urgence (R130), seuil de l'alerte « plus personne pour déposer » (R123), seuils d'alerte de dépense d'IA (R110), seconde lecture différée (W-11, R122), délai d'annulation d'une suppression (R4)
 - **Quand** une personne du client ou une personne d'Axion le change
 - **Alors** la valeur reste dans des bornes écrites (confirmation : 2 à 30 minutes ; mode urgence : 30 minutes à 24 heures ; alerte R123 : 24 à 120 heures ; alertes d'IA : entre 10 % et 90 % ; seconde lecture : au moins 1 heure ; annulation R4 : au moins 14 jours) ; une valeur hors bornes est refusée par le serveur avec la raison ; le changement est fait par le responsable du compte seulement (par Axion pour les paramètres de l'instance, dont le plafond d'IA de R110), demande le deuxième facteur (R180) et est inscrit au journal ; les bornes sont des valeurs provisoires datées dans la table de paramètres ; une migration qui abaisse une valeur sous sa décision datée fait échouer la vérification.
-- Version : mvp : constat verif2 : un réglage sans borne ni auteur vide une protection sans toucher au code.
+- Version : mvp : constat de la seconde vérification : un réglage sans borne ni auteur vide une protection sans toucher au code.
 - État : à faire
 - Lot : L01
-- Cahier : aucune (constat verif2 du 08/11/2026, catalogue Q4 cas 23, 24, 32, 33)
+- Cahier : à reporter dans le cahier v1.8 ; origine : constat de la seconde vérification du 08/11/2026, catalogue Q4 cas 23, 24, 32, 33
 - Écran : Paramètres ; Vue Axion
 
 ## 4 bis. Contrôles de qualité Q-01 à Q-36
