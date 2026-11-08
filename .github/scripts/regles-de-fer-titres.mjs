@@ -10,7 +10,7 @@ import { DOSSIER_FICHES, MOTIF_ID, lireFiche } from "./fiches.mjs";
 const LISTE = ".github/scripts/regles-de-fer-titres.txt";
 const IGNORES = new Set([".git", "node_modules", ".next", "coverage", "playwright-report", "test-results"]);
 // Marques qui coupent un test (écrites avec une classe de caractères : la garde des mots de la CI refuse ces mots en clair).
-const MARQUE_COUPEE = /\.(s[k]ip|o[n]ly|t[o]do|f[a]ils)\s*$|\.(s[k]ipIf|r[u]nIf)\([^"'`]*\)\s*$/;
+const MARQUE_COUPEE = /\.(s[k]ip|o[n]ly|t[o]do|f[a]ils|f[i]xme)\s*$|\.(s[k]ipIf|r[u]nIf)\([^"'`]*\)\s*$/;
 
 const problemes = [];
 if (!existsSync(LISTE)) {

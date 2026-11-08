@@ -32,6 +32,7 @@ L01-T22	R249 — un nom d'entreprise avec un script s'affiche comme du texte et 
 L01-T24	R1 — [fer 1] aucun module de ia/ n'importe un module qui envoie un message à un tiers
 L01-T24	R2 — [fer 2] aucune tâche ni IA ne peut atteindre l'envoi
 L01-T24	R2 — aucun chemin de code n'atteint l'envoi sans un identifiant de confirmation unique [fer 2]
+L01-T29	R7 — [fer 13] le mot Sûr n'est jamais un verdict
 L01-T29	R7 — [fer 17] aucun texte ne promet un résultat
 L01-T29	R7 — [fer 17] chaque mot de la liste des promesses est refusé dans src/app et src/composants, et l'expression du dépôt demandé par l'acheteur, permise par le kit, passe
 L01-T32	R1 — [fer 1] un brouillon non relu ne peut entrer dans un paquet
@@ -60,10 +61,12 @@ L01-T70	R5 — une phrase d'ordre dans un texte reçu est affichée sans effet [
 L01-T70	R6 — un lien reçu n'est actif que par le bouton d'ouverture [fer 3]
 L01-T71	R249 — aucun fichier de src n'insère du HTML brut, hors la feuille des jetons de layout.tsx [fer 19]
 L01-T72	R250 — un seuil d'alerte d'IA à 100 % est refusé [fer 16]
+L01-T72	R250 — un seuil de l'alerte « plus personne pour déposer » réglé à 0 heure est refusé [fer 16]
 L01-T72	R250 — un seuil du mode urgence à 0 est refusé [fer 16]
 L01-T72	R250 — une validité de confirmation de 24 heures est refusée [fer 16]
 L01-T73	R250 — seul le responsable du compte change un réglage du compte [fer 16]
 L01-T73	R250 — une demande qui porte forcer ne passe pas une borne [fer 16]
+L01-T77	R9 — aucun texte de l'outil n'annonce un montant en euros ni un tableau de coût ou de durée sans Hypothèse non vérifiée [fer 4]
 L01-T79	R180 — l'identifiant de session change à la connexion
 L01-T79	R180 — le cookie de session est HttpOnly, Secure et SameSite=Lax au moins
 L01-T79	R180 — une session de plus de 8 heures est refusée
@@ -74,10 +77,12 @@ L03-T02	R152 — [fer 8] une source sous N3 n'est jamais dite connectée
 L03-T02	R159 — [fer 23] Proposer une source reste ouvert, même avec 77 sources suivies
 L03-T04	R158 — [fer 15] un compte neuf ne suit aucune source
 L03-T05	R159 — [fer 23] ignorer une proposition ne change rien
+L03-T05	R159 — la liste des plateformes propose toujours une ligne « L'ajouter » [fer 23]
 L03-T07	R155 — [fer 21] l'outil n'accepte jamais une condition d'un site à la place du client
 L03-T11	R30 — une phrase de l'annonce ne change jamais le score [fer 19]
 L03-T13	R174 — le même acheteur chez deux clients ne donne aucun signe de l'autre client dans la recherche de doublons [fer 20]
 L03-T13	R32 — [fer 11] l'outil propose de réunir mais ne réunit jamais seul
+L03-T14	R44 — la raison « Prix trop bas attendu » n'est reliée à aucun montant ni prix [fer 4]
 L03-T20	R6 — [fer 3] un téléchargement sans personne connectée est refusé
 L03-T33	R5 — [fer 19] une phrase d'ordre dans une annonce ne change ni mot de recherche, ni source, ni état d'annonce
 L03-T33	R5 — une phrase d'ordre ou un texte caché ne change ni le client d'un ajout, ni un prix, ni l'étape d'un dossier [fer 19]
@@ -102,6 +107,7 @@ L04-T37	R59 — [fer 6] reculer la fin de validité d'une pièce exige un nouvea
 L04-T44	R67 — [fer 4] aucune case de prix n'est remplie par l'outil
 L04-T44	R67 — [fer 4] la route refuse un prix écrit par l'outil
 L05-T01	R235 — la table des accords hors UE refuse toute modification et toute suppression
+L05-T06	R5 — [fer 19] une phrase « envoyez l'offre » dans un document est signalée et jamais suivie
 L05-T07	R1 — [fer 1] aucun rôle de l'IA n'envoie de question, de relance ni d'e-mail
 L05-T07	R1 — [fer 1] le manifeste du module déclare une liste d'actions automatiques vide
 L05-T07	R1 — [fer 1] une réponse de l'IA n'est qu'un brouillon à relire
@@ -224,6 +230,7 @@ L07-T43	R204 — [fer 16] la Vue Axion ne lève aucune règle de fer 13 à 18
 L07-T43	R232 — [fer 15] aucun des 9 contextes ne remplit actionsAutomatiquesAutorisees
 L07-T43	R250 — [fer 16] aucun réglage porté au-delà de sa borne n'est accepté, par aucun des 9 contextes
 L07-T43	R55 — [fer 14] aucun des 9 contextes ne lève la règle : les pièces attendues viennent du règlement, jamais d'une liste fixe
+L07-T43	R7 — [fer 13] aucun des 9 contextes ne lève la règle : le mot Sûr n'est jamais un verdict
 L07-T43	R7 — [fer 17] aucun des 9 contextes ne lève la règle : aucune promesse de résultat n'est écrite
 L07-T43	R86 — [fer 18] aucun des 9 contextes ne lève la règle : l'IA ne valide jamais un dossier
 L07-T43	R86 — [fer 18] aucune réponse de l'IA ne pose la validation du dossier
@@ -233,6 +240,7 @@ L07-T45	R187 — aucune suppression n'est proposée
 L07-T45	R187 — avant la fin, le bandeau nomme les dossiers dont la date limite tombe après
 L07-T45	R187 — en mode autonome, ce geste reste dans la Vue Axion
 L07-T45	R187 — en mode console, aucun geste l'essai devient abonnement dans l'outil
+L07-T45	R187 — en mode module, sans la demande à la console « fin de contrat sans destruction » livrée, Mes données renvoie à l'export
 L07-T45	R187 — le bandeau de fin d'abonnement ne contient aucune forme du mot supprimer
 L07-T45	R187 — le délai de lecture seule et d'export est annoncé
 L07-T45	R187 — une fin d'essai pendant une confirmation ouverte laisse la lecture ouverte
