@@ -4,7 +4,7 @@ Version 2 du 08/11/2026, alignée sur le cahier v1.7, la maquette v23 et l'ordre
 
 Ce document suit le gabarit `SPEC.md` du kit (sections 1 à 12). Il est destiné au dépôt public : il ne contient aucun nom de client, de salarié ni de ville, et aucun prix. Les décisions du responsable du 07/11 et du 08/11/2026 sont appliquées, avec leur date ; une valeur provisoire est écrite « valeur provisoire, datée et sourcée » et rangée dans une table de paramètres. Ce qui n'a pas été essayé est marqué **À PROUVER EN LOT 0** ; le MVP ne le promet pas et prévoit un repli à la main.
 
-**Comment lire ce document.** Les numéros `EX-…` (entre parenthèses ou dans les lignes « Cahier : ») et les lignes « Cahier » sont des numéros de traçabilité vers un document interne, le cahier des charges ; les scripts de traçabilité les lisent, c'est pourquoi ils restent. Tout le texte utile de ce document interne est recopié dans les R (Étant donné, Quand, Alors et compléments) : l'auteur d'une fiche n'a jamais à lire le cahier. Les numéros R sont des identifiants stables, rangés par domaine et non dans l'ordre de lecture : R211 à R250 ont été ajoutées en v2 et v3 au milieu des domaines. Dix-huit règles n'ont pas de numéro EX parce qu'elles viennent du kit, de la console ou des décisions du 08/11/2026 et non du cahier (R112, R188, R189, R200, R201, R206, R207, R210, R213, R222, R223, R230, R231, R232, R236, R244, R249, R250) : leur ligne « Cahier » dit « à reporter dans le cahier v1.8 » et donne l'origine (R234 et R237 ont une EX et un complément à reporter). Les numéros `D-nn` et `W-nn` sont des décisions datées, expliquées chacune en une phrase dans la section « Décisions datées » à la fin de ce document. Les « [fer n] » renvoient aux règles de fer du §1.
+**Comment lire ce document.** Les numéros `EX-…` (entre parenthèses ou dans les lignes « Cahier : ») et les lignes « Cahier » sont des numéros de traçabilité vers un document interne, le cahier des charges ; les scripts de traçabilité les lisent, c'est pourquoi ils restent. Tout le texte utile de ce document interne est recopié dans les R (Étant donné, Quand, Alors et compléments) : l'auteur d'une fiche n'a jamais à lire le cahier. Les numéros R sont des identifiants stables, rangés par domaine et non dans l'ordre de lecture : R211 à R250 ont été ajoutées en v2 et v3 au milieu des domaines. Dix-huit règles n'ont pas de numéro EX parce qu'elles viennent du kit, de la console ou des décisions du 08/11/2026 et non du cahier (R112, R188, R189, R200, R201, R206, R207, R210, R213, R222, R223, R230, R231, R232, R236, R244, R249, R250) : leur ligne « Cahier » dit « à reporter dans le cahier v1.8 » et donne l'origine (R234 et R237 ont une EX et un complément à reporter). Les R251 à R262 (v3.1, libre-service) suivent la même règle : leur ligne « Cahier » dit « à reporter dans le cahier v1.8 » (R251 à R253 et R259 à R262 sans EX ; R254 à R258 avec une EX et un complément). Les numéros `D-nn` et `W-nn` sont des décisions datées, expliquées chacune en une phrase dans la section « Décisions datées » à la fin de ce document. Les « [fer n] » renvoient aux règles de fer du §1.
 
 ## Changements v2 (08/11/2026)
 
@@ -26,6 +26,14 @@ Ce document suit le gabarit `SPEC.md` du kit (sections 1 à 12). Il est destiné
 - **Corrections du tour 2 de l'audit C (08/11/2026, correcteur final)** : §1 fer 6 et R57 : passer une pièce exigée par le règlement en « Facultative », ou reculer sa date de validité sans nouveau fichier, est refusé et tracé ; seule issue « Cette pièce est fournie autrement » ; aucun rôle ne le fait (N-1) ; R187 et R209 : la garde de lecture seule relit côté serveur le geste, ses tables et la date de confirmation en base, jamais une date venue de la requête (N-2) ; R3 : un écrasement de contenu est une destruction, nouvelle version obligatoire, aucune réécriture de l'entrepôt sous la même clé (N-5) ; R235 : qui dépose le document signé, et seconde personne d'Axion qui le vérifie avant l'ouverture, tracée (C-16) ; §1 : déclaration `reglesDeFer` obligatoire dans chaque route, refus de toute route d'écriture en Lecture seule, câblage des gardes de session prouvé (C-02, N-3, C-13) ; §1 : non-levée reprise par L07-T43, L07-T47, L07-T48 et L07-T49.
 - **Consolidation finale de la seconde vérification (08/11/2026)** : contrôles Q-01 à Q-36 définis (section 4 bis) ; table des paramètres datée (section 4 ter) et ligne « Paramètre » dans R37, R74, R110, R111, R148, R149, R156, R167, R170, R179, R183, R185, R195, R200, R214 (seconde lecture différée selon W-11 : le lendemain, jamais moins d'1 heure), R228 ; R179 précise l'entité et la revue des accès (livrées par L02-T10) ; R183 nomme les six étapes de la mise en route.
 - Numérotation : R1 à R250, uniques et sans trou, rangées par domaine (identifiants stables, pas un ordre de lecture ; R211 à R250 ajoutées en v2 et v3), plus R-C1 à R-C6.
+
+## Changements v3.1 (08/11/2026)
+
+- **Libre-service prêt, interrupteur éteint** (décision du responsable du 08/11/2026 : « Je veux l'inscription en libre-service, prête tout de suite, pour pouvoir l'allumer le jour où je le souhaite. ») : nouveau domaine « Libre-service (interrupteur) », R251 à R262 ; deux modes d'ouverture qui coexistent, « sur devis » (par défaut, R184) et « libre-service » ; interrupteur `LIBRE_SERVICE_OUVERT` éteint par défaut, changé par le seul responsable d'Axion (permission `appels-offres-libre-service`, deuxième facteur, motif, journal), après 7 conditions lues par l'outil (R252).
+- **Parcours** : inscription et adresse vérifiée (R253) ; SIREN contrôlé par format et, si elle est admise, par l'API publique Sirene de l'INSEE ; refus automatique des codes NAF 86 et 87, du droit public et des entités sans SIREN (R254) ; conditions, contrat de sous-traitance et annexe acceptés en ligne avec leur version (R255) ; essai automatique, abonnement et paiement dans la console, lus par l'outil, jamais montrés (R256) ; liste de mise en service remplie par le client (R257) ; voie de l'IA choisie par le client, l'accord hors Union restant vérifié par Axion avant l'ouverture de l'IA (R258) ; limites contre les abus (R259) ; repli autonome par le chemin d'invitation du kit, sans changer la brique comptes (R260) ; 8 écrans (R261) ; recette de bout en bout (R262).
+- **Fiches** : L07-T17 et L07-T39 réécrites (deux modes) ; fiches nouvelles L07-T50 à L07-T62 (L07-T62 : port de la console du libre-service et faux serveur). **Console** : demandes DCA-43 à DCA-54.
+- **Paramètres** ajoutés au §4 ter : `LIBRE_SERVICE_OUVERT`, `LS_DUREE_ESSAI_JOURS`, `LS_VALIDITE_LIEN_HEURES`, `LS_CADENCE_INSCRIPTIONS`, `LS_ESSAIS_PAR_SIREN`, `LS_AGE_MAX_RESTAURATION_JOURS`, `LS_RESPONSABLE_TACHES_APRES_COUP`, `LS_LIENS_PAR_JOUR`, `LS_CONSERVATION_DEMANDES_MOIS`, `ATTENTE_REPONSE_INSCRIPTION_MS`, `DELAI_REGISTRE_ENTREPRISES_S`.
+- Numérotation : R1 à R262, uniques et sans trou, plus R-C1 à R-C6 ; R251 à R253 et R259 à R262 n'ont pas de numéro EX (origine : décision du 08/11/2026, à reporter dans le cahier v1.8) ; R254 à R258 ont une EX et un complément à reporter.
 
 ## 1. Contexte
 
@@ -2796,7 +2804,7 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 ### R184 : mise en service d'un client
 - **Étant donné** un nouveau client
 - **Quand** Axion prépare son ouverture
-- **Alors** le registre des traitements du client est rempli (finalité, données, qui voit, durée, chez qui elles vont) ; la liste d'accueil du kit est cochée ; une sauvegarde et une restauration d'essai sont vérifiées ; le clic d'ouverture est fait par une personne d'Axion ; une personne d'Axion choisit le client actif avant toute action ; la mise en service suit des étapes numérotées, chacune fermée par « J'ai vérifié : valider l'étape n » ; le registre des traitements dit aussi les personnes concernées, les destinataires, les sous-traitants ultérieurs, les mesures de sécurité et le rôle d'Axion et du client pour chaque ligne ; il est daté et signé par une personne habilitée côté Axion et côté client ; côté Axion, la mise en service compte 12 étapes (« Étape n sur 12 ») ; la liste de mise en service a une ligne « Voie de l'IA » (R235) : route de l'Union européenne du fournisseur admise par la console (nom du modèle, date et source de la preuve) OU accord écrit du client au transfert hors de l'Union européenne (case dédiée, jamais cochée par défaut, avec la référence du document signé, la date et la personne d'Axion qui l'a recueilli) ; sans l'une des deux, la case « IA désactivée pour ce client » est cochée et la mise en service continue : l'outil marche sans IA.
+- **Alors** le registre des traitements du client est rempli (finalité, données, qui voit, durée, chez qui elles vont) ; la liste d'accueil du kit est cochée ; une sauvegarde et une restauration d'essai sont vérifiées ; le clic d'ouverture est fait par une personne d'Axion ; une personne d'Axion choisit le client actif avant toute action ; la mise en service suit des étapes numérotées, chacune fermée par « J'ai vérifié : valider l'étape n » ; le registre des traitements dit aussi les personnes concernées, les destinataires, les sous-traitants ultérieurs, les mesures de sécurité et le rôle d'Axion et du client pour chaque ligne ; il est daté et signé par une personne habilitée côté Axion et côté client ; côté Axion, la mise en service compte 12 étapes (« Étape n sur 12 ») ; la liste de mise en service a une ligne « Voie de l'IA » (R235) : route de l'Union européenne du fournisseur admise par la console (nom du modèle, date et source de la preuve) OU accord écrit du client au transfert hors de l'Union européenne (case dédiée, jamais cochée par défaut, avec la référence du document signé, la date et la personne d'Axion qui l'a recueilli) ; sans l'une des deux, la case « IA désactivée pour ce client » est cochée et la mise en service continue : l'outil marche sans IA ; pour un compte d'origine `libre_service` (R251), la même liste est remplie par le client lui-même, la voie de l'IA est son choix et l'ouverture se fait sans clic d'Axion (R257, R258).
 - **Complément du cahier (EX-RG-01)** : Vérification : le tableau des traitements existe, est daté et signé par une personne habilitée côté Axion et côté client, et aucune ligne « à définir » ne reste à la mise en service ; une ligne « à définir » empêche de valider l'étape de mise en service concernée.
 - **Complément du cahier (EX-UI-131)** : Recette : en rôle Axion, Vue Axion › Mise en service dit « Étape n sur 12 » ; en rôle client, la Vue Axion n'est atteignable ni par le menu ni par son adresse.
 - Version : mvp : RGPD, protège.
@@ -2859,6 +2867,136 @@ L00 n'est pas un lot de produit : planche (étape 2 bis du kit) et preuves faite
 - Lot : L07
 - Cahier : à reporter dans le cahier v1.8 ; origine : ordre d'architecture du responsable du 08/11/2026
 - Écran : Toutes les pages (zone `/appels-offres/**` du portail) ; Vue Axion
+
+### Domaine : Libre-service (interrupteur)
+
+Ces exigences portent la décision du responsable du 08/11/2026 : « Je veux l'inscription en libre-service, prête tout de suite, pour pouvoir l'allumer le jour où je le souhaite. » Une entreprise peut s'inscrire, essayer et s'abonner sans aucun geste ni validation d'Axion, derrière un interrupteur éteint par défaut ; le mode « sur devis » (R184) reste le mode par défaut. Détail et parcours : `AMENDEMENT-LIBRE-SERVICE-2026-11-08.md`.
+
+### R251 : deux modes d'ouverture et un interrupteur éteint par défaut
+- **Étant donné** l'outil, dans les deux modes (intégré à la console ou autonome)
+- **Quand** une entreprise veut ouvrir un compte
+- **Alors** deux modes d'ouverture coexistent : « sur devis » (mode par défaut : devis signé, compte ouvert et mise en service fermée par une personne d'Axion, R184) et « libre-service » (inscription, essai, mise en service et abonnement sans aucun geste ni validation d'Axion) ; le libre-service est derrière l'interrupteur `LIBRE_SERVICE_OUVERT`, éteint par défaut ; une valeur absente, illisible ou inconnue vaut « éteint » ; en mode autonome, l'interrupteur est tenu dans la Vue Axion › Libre-service ; en mode intégré, la valeur qui fait foi est celle de la console (champ de l'état voulu C4 demandé, DCA-51) et la Vue Axion la montre en lecture, avec un lien vers la console ; l'allumer ou l'éteindre demande la permission `appels-offres-libre-service` (royaume de l'équipe, accordée au seul responsable d'Axion, jamais par défaut), un deuxième facteur vérifié il y a moins de 5 minutes (R180) et un motif écrit ; chaque changement est une nouvelle ligne, jamais une modification, et une ligne au journal (`libre_service_allume` ou `libre_service_eteint` : qui, quand, motif, ancienne et nouvelle valeur) ; aucun rôle du client, aucun autre rôle d'Axion, aucune tâche planifiée, aucun agent d'IA et aucune route appelée sans cette permission ne le change (refus inscrit `acces_refuse`) ; éteint, toute route du libre-service refuse avant tout traitement, aucun compte n'est créé, la page « Créer mon compte » répond comme une page introuvable et le catalogue dit « sur devis » ; l'origine d'un compte (`devis` ou `libre_service`) est posée à sa création et ne change jamais ; éteindre l'interrupteur ne touche aucun compte déjà ouvert (essai, abonnement et données gardés) ; une demande d'inscription en cours est refusée au clic suivant avec la phrase « Les inscriptions en ligne sont fermées pour le moment. Vous pouvez nous écrire pour un devis. » et archivée, jamais effacée ; un compte ouvert en libre-service l'est toujours par les gestes de la personne, jamais seul (fer 15).
+- Version : mvp : décision du responsable du 08/11/2026 ; livrée éteinte.
+- Paramètre (08/11/2026) : `LIBRE_SERVICE_OUVERT` = faux (éteint) ; valeur par défaut exportée par `src/lib/libre-service/interrupteur.ts`, seul endroit.
+- État : à faire
+- Lot : L07
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Vue Axion › Libre-service ; Créer mon compte
+
+### R252 : conditions avant d'allumer le libre-service
+- **Étant donné** l'interrupteur éteint
+- **Quand** le responsable d'Axion demande à l'allumer
+- **Alors** l'outil lit lui-même une liste fermée de 7 conditions, jamais déclarées à la main : (1) les textes à accepter sont publiés avec leur version, leur date et leur empreinte : conditions générales de vente (`cgv`), conditions d'utilisation (`conditions_utilisation`), contrat de sous-traitance avec, en annexe, les lignes de l'outil au registre des traitements (`sous_traitance`), annexe « Appels d'offres » (`annexe_appels_offres`), texte de l'accord au transfert hors de l'Union européenne pour l'IA (`accord_ia_hors_ue`) ; ceux de la console en mode intégré, les modèles du kit en mode autonome ; (2) chaque texte porte une ligne de relecture datée, et la Vue Axion dit « NON VÉRIFIÉ juridiquement : aucun professionnel du droit n'a relu ce texte » ; (3) en mode intégré, les demandes à la console bloquantes pour le libre-service (DCA-13, DCA-43, DCA-44, DCA-46 à DCA-49, DCA-51, DCA-52) sont marquées livrées ; en mode autonome, la preuve du chemin d'invitation du kit (R260) est passée ; (4) la dernière restauration d'essai datée a moins de `LS_AGE_MAX_RESTAURATION_JOURS` ; (5) la recette de bout en bout du libre-service (R262) est passée sur la version en service, pour le mode concerné ; (6) un plafond d'IA par défaut existe pour un compte ouvert en libre-service (lu présent ou absent, jamais un montant) ; (7) `LS_RESPONSABLE_TACHES_APRES_COUP` nomme une personne d'Axion ; une condition manquante : l'allumage est refusé, l'écran nomme chaque condition manquante, le refus va au journal ; une condition qui tombe pendant que l'interrupteur est allumé met les inscriptions nouvelles en pause, prévient Axion dans la Vue Axion et va au journal ; les comptes déjà ouverts ne changent pas ; la reprise est un nouvel allumage, avec les mêmes contrôles.
+- Version : mvp : on n'ouvre pas une porte sans ses gardes.
+- Paramètre (08/11/2026) : `LS_AGE_MAX_RESTAURATION_JOURS` = 35 jours ; valeur provisoire, datée.
+- État : à faire
+- Lot : L07
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Vue Axion › Libre-service
+
+### R253 : inscription et adresse vérifiée
+- **Étant donné** l'interrupteur allumé et ses conditions remplies
+- **Quand** une personne remplit « Créer mon compte »
+- **Alors** elle saisit son prénom, son nom, sa fonction, son adresse e-mail et le SIREN de l'entreprise, et coche elle-même « J'ai le pouvoir d'engager cette entreprise » (case jamais cochée par défaut) ; aucune autre donnée n'est demandée (R199) ; chaque champ libre a 120 caractères au plus, sans caractère de contrôle ni saut de ligne, et reste une donnée, jamais un ordre (R5, R249) ; en mode intégré, la console crée l'identité (mot de passe ou clé d'accès) dans le royaume `clients`, envoie le lien et fait accepter ses conditions (DCA-43, DCA-44, DCA-46) ; elle appelle les contrôles de l'outil par une route interne signée ; la route d'inscription de l'outil n'est servie qu'en mode autonome (R260) ; l'outil ne voit jamais un mot de passe ; la réponse au formulaire est toujours la même phrase : « Si cette adresse peut ouvrir un compte, un lien vient de lui être envoyé. », sauf pour les refus tirés de données publiques (R254) ; un e-mail part toujours vers l'adresse saisie : soit le lien, soit, si l'entreprise a déjà un compte ou a déjà eu son essai, la phrase de refus, jamais montrée à l'écran ; le lien est à usage unique, valable `LS_VALIDITE_LIEN_HEURES` ; son jeton n'est gardé qu'en empreinte et comparé à temps constant ; un lien rejoué ou expiré est refusé avec « Ce lien n'est plus valable. Demandez-en un nouveau. » ; le clic vérifie l'adresse et mène à l'acceptation des conditions (R255) ; le compte n'est ouvert, et aucun espace n'est créé, qu'une fois les conditions acceptées ; la personne devient alors Responsable du compte et active son deuxième facteur (R180) avant tout geste protégé et avant la fin de sa mise en service ; la demande est gardée en ajout seul (qui, quand, résultat de chaque contrôle) ; une demande qui n'aboutit pas ne bloque jamais le SIREN : une nouvelle demande est permise, l'ancienne est masquée, jamais effacée seule ; après `LS_CONSERVATION_DEMANDES_MOIS`, une demande non aboutie passe en archive gelée par un geste d'Axion dans la Vue Axion, jamais par une tâche.
+- Version : mvp : décision du responsable du 08/11/2026 (libre-service).
+- Paramètre (08/11/2026) : `LS_VALIDITE_LIEN_HEURES` = 24 heures ; valeur provisoire, datée.
+- État : à faire
+- Lot : L07
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Créer mon compte ; Vérifiez votre adresse
+
+### R254 : contrôle de l'entreprise à l'inscription
+- **Étant donné** un SIREN saisi à l'inscription
+- **Quand** l'outil le contrôle
+- **Alors** (1) le format est vérifié : 9 chiffres et clé de contrôle (Luhn), sinon « Ce numéro SIREN ne semble pas juste. Vérifiez-le. » ; (2) si l'appel à l'API publique Sirene de l'INSEE est admis (par la console en mode intégré, DCA-50 ; en mode autonome, adresse inscrite à la liste d'autorisation réseau et clé posée), l'outil lit l'unité légale en `DELAI_REGISTRE_ENTREPRISES_S` au plus : état, activité principale (code NAF), catégorie juridique ; il garde seulement le SIREN, la dénomination, le code NAF, la catégorie juridique, l'état, la date de lecture et la source ; pour une unité en diffusion partielle, il ne garde aucune donnée de personne venue de l'INSEE ; (3) sinon, contrôle de format seul : la personne choisit son activité dans une liste, et l'activité est marquée « non vérifié à la source » ; refus montrés à l'écran, parce qu'ils viennent de données publiques ou de la saisie, chacun avec une phrase simple et une sortie « Vous pouvez nous écrire » : SIREN mal formé ; entreprise cessée ; activité aux codes NAF 86 ou 87 (DCA-35 : « L'inscription en ligne n'est pas ouverte aux activités de santé et d'hébergement médico-social. ») ; personne morale de droit public, catégorie juridique qui commence par 7 (DCA-34 : « Pour un établissement public, l'ouverture se fait sur devis. ») ; entité sans SIREN, établie hors de France (R237 : ouverture sur devis) ; refus envoyés seulement par e-mail à l'adresse saisie, jamais à l'écran, pour ne jamais dire qu'une entreprise est cliente : SIREN qui a déjà un compte ouvert et non archivé, dans l'un ou l'autre mode (R237 : « Un compte existe peut-être déjà pour cette entreprise. Demandez une invitation à son responsable, ou écrivez-nous. ») ; SIREN qui a déjà eu `LS_ESSAIS_PAR_SIREN` essais (« Un essai a déjà eu lieu pour cette entreprise. Vous pouvez nous écrire. ») ; une demande non aboutie ou un espace archivé ne comptent jamais ; API de l'INSEE en panne : aucun refus, format seul, marque « non vérifié à la source », relecture plus tard par une tâche ; si cette relecture trouve un code 86 ou 87, une personne morale de droit public ou une entreprise cessée, le compte est signalé « à vérifier » dans la Vue Axion et Axion est prévenu, rien n'est fermé ni effacé par l'outil ; chaque refus va au journal avec son motif ; le SIREN n'est jamais envoyé à l'IA ; le contrôle de la console à l'abonnement (règle C-491) reste en plus.
+- Version : mvp : une entité, un compte (R237) ; clients refusés par la console (DCA-35).
+- Paramètre (08/11/2026) : `LS_ESSAIS_PAR_SIREN` = 1 ; valeur provisoire, datée.
+- État : à faire
+- Lot : L07
+- Cahier : EX-SI-R-11 (aucun mélange entre clients) ; complément à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Créer mon compte ; Inscription refusée
+
+### R255 : conditions acceptées en ligne, avec leur version
+- **Étant donné** une adresse vérifiée
+- **Quand** le compte va s'ouvrir
+- **Alors** la personne lit et accepte, chacun par sa propre case jamais cochée par défaut, quatre textes : les conditions générales de vente (`cgv`), les conditions d'utilisation (`conditions_utilisation`), le contrat de sous-traitance, avec en annexe les lignes de l'outil au registre des traitements (`sous_traitance`), et l'annexe « Appels d'offres » (`annexe_appels_offres`) ; ceux de la console en mode intégré (DCA-46), les modèles du kit en mode autonome ; un cinquième bloc montre le texte de l'accord au transfert hors de l'Union européenne pour l'IA (`accord_ia_hors_ue`), facultatif, sans case : il se donne plus tard dans Ma mise en service (R258) ; chaque texte s'affiche en entier dans la page (pas seulement un lien) et se télécharge ; chaque acceptation est une ligne en ajout seul (texte, version, date de la version, empreinte du texte, identifiant de la personne ou de la demande, heure, mode) et une ligne au journal (R234) ; en mode autonome, les acceptations faites avant l'ouverture sont rattachées à la demande, puis recopiées sur le compte à son ouverture avec leur heure d'origine ; sans les quatre cases, aucun compte n'est ouvert et la demande reste masquée ; l'outil n'accepte jamais seul un texte à la place du client et l'IA n'y prend aucune part (R186) ; une nouvelle version d'un texte est montrée au Responsable du compte à sa connexion suivante, avec ce qui change ; tant qu'il ne l'a pas acceptée, la lecture, l'export et les 5 gestes de trace de R187 restent ouverts, le reste attend, et les autres personnes lisent « Le responsable du compte doit accepter les nouvelles conditions. » ; en mode intégré, si la console garde déjà l'acceptation de ses propres textes, l'outil lit leurs versions et n'enregistre que l'annexe « Appels d'offres » ; l'acceptation par une personne invitée reste celle de L01-T11.
+- Version : mvp : on ne vend pas sans cadre écrit (R185) ; décision du responsable du 08/11/2026 (libre-service).
+- État : à faire
+- Lot : L07
+- Cahier : EX-RG-103 ; complément à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Accepter les conditions ; Mes données
+
+### R256 : essai automatique, puis abonnement lu dans la console
+- **Étant donné** un compte ouvert en libre-service
+- **Quand** la personne y entre pour la première fois après l'acceptation des conditions
+- **Alors** l'essai commence, pour `LS_DUREE_ESSAI_JOURS` ; en mode intégré, la date de fin d'essai est posée par la console (`periodeEssaiFin`, DCA-13, DCA-48) et l'outil la lit ; en mode autonome, elle est posée par le parcours lui-même (ligne en ajout seul), jamais par une personne d'Axion ; la page « Mon essai » dit les jours restants, la date de fin et ce qui se passe ensuite (lecture seule et export, rien n'est effacé : R187, L07-T45), sans aucun prix, montant, signe monétaire ni formulaire de paiement ; « Passer à l'abonnement » ouvre la page Abonnement de la console (mode intégré, DCA-49) ; l'outil ne sait qu'un abonnement a commencé qu'en lisant l'état du contrat exposé par la console (essai devenu actif), jamais d'après un clic ou une adresse de retour ; en mode autonome, il n'y a aucun paiement en ligne : « Pour continuer après l'essai, écrivez-nous. », et le geste « L'essai devient abonnement » reste dans la Vue Axion (R187) ; rappels dans l'outil 7 jours et 1 jour avant la fin (et par e-mail si l'événement existe dans la table d'envoi, R201) ; un changement de `LS_DUREE_ESSAI_JOURS` reste entre 7 et 90 jours, est fait par Axion avec le deuxième facteur, va au journal (R250) et ne vaut que pour les essais qui commencent après lui ; un seul essai par SIREN (R254).
+- Version : mvp : décision du responsable du 08/11/2026 (libre-service) ; fin d'essai en lecture seule avec export (décision du 08/11/2026).
+- Paramètre (08/11/2026) : `LS_DUREE_ESSAI_JOURS` = 30 jours (bornes 7 à 90) ; valeur provisoire, alignée sur `essai_jours: 30` du kit.
+- État : à faire
+- Lot : L07
+- Cahier : EX-SI-C-06 ; complément à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Mon essai ; Aujourd'hui (bandeau)
+
+### R257 : mise en service faite par le client lui-même
+- **Étant donné** un compte dont l'origine est `libre_service`
+- **Quand** le Responsable du compte ouvre « Ma mise en service »
+- **Alors** la liste de mise en service de R184 (L07-T17) est la même, mais chaque point devient une réponse ou une case du client, aucune n'étant cochée ni choisie par défaut : (1) annexe « Appels d'offres » acceptée et (2) contrat de sous-traitance accepté : repris de R255, montrés en lecture ; (3) lignes de l'outil au registre : acceptées avec le contrat de sous-traitance, dont elles sont l'annexe (R255), la version étant signée une fois côté Axion pour tous (R252) ; (4) au moins une Personne qui confirme l'envoi nommée par le client (lui-même s'il le veut), avec son deuxième facteur actif, deux étant recommandées ; (5) sources suivies choisies par le client ; (6) restauration d'essai : remplacée par la dernière restauration d'essai datée de l'instance (R252), montrée « Dernière restauration d'essai : le jj/mm/aaaa » ; (7) nom du client dans la surveillance de non-fuite du dépôt public : tâche d'Axion après coup, jamais montrée au client et jamais bloquante ; (8) premier rendez-vous et point à 7 jours : proposés (« Prendre rendez-vous avec Axion, si vous le souhaitez »), jamais bloquants ; (9) volume attendu : trois questions (personnes, dossiers par an, taille des pièces), « Je ne sais pas » admis ; (10) voie de l'IA : choix du client (R258) ; l'outil s'ouvre en entier quand les points bloquants (1 à 5, 9 et 10) sont faits, par le geste du client « J'ai tout vérifié : ouvrir mon outil », sans aucun clic d'Axion ; avant ce geste, seules Ma mise en service, Mon essai, Aide, Mentions et Mes données sont ouvertes ; Axion voit la liste en lecture dans la Vue Axion, avec ses tâches après coup ; la forme de la liste suit l'origine du compte, jamais l'état courant de l'interrupteur ; un compte d'origine `devis` garde la liste fermée par Axion (R184).
+- Version : mvp : décision du responsable du 08/11/2026 (libre-service).
+- État : à faire
+- Lot : L07
+- Cahier : EX-RG-01, EX-UI-131 ; complément à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Ma mise en service ; Vue Axion › Mise en service
+
+### R258 : voie de l'IA choisie par le client en ligne
+- **Étant donné** un compte d'origine `libre_service` à sa mise en service
+- **Quand** le Responsable du compte répond au point « Voie de l'IA »
+- **Alors** trois choix, aucun choisi d'avance : (a) si une route de l'Union européenne du fournisseur est admise par la console avec sa preuve datée (R235 a), « Ouvrir l'aide de l'IA » l'ouvre tout de suite, sans rien signer, et l'écran nomme le modèle et la date de la preuve ; (b) sinon, « Je donne mon accord au transfert hors de l'Union européenne pour l'aide de l'IA » : Responsable du compte seulement, deuxième facteur de moins de 5 minutes, texte fixe montré en entier avec sa version et sa date, nom et fonction saisis par la personne, case cochée par elle ; l'outil fait de cette acceptation le document signé de R235 (texte, version, empreinte, qui, quand) et le dépose dans l'espace du client, dépôt tracé ; l'IA reste fermée jusqu'à la vérification par une personne d'Axion différente de celle qui a déposé (R235), et l'écran le dit : « Votre accord est noté. L'aide de l'IA s'ouvrira après une vérification par Axion. Vous pouvez tout faire à la main en attendant. » ; l'ouverture du compte n'attend pas cette vérification ; (c) « Je ne veux pas de l'aide de l'IA » : IA désactivée pour ce client, l'outil marche sans IA ; le point n'est fait que par un choix explicite ; le choix se change plus tard depuis Ma mise en service ; le retrait de l'accord suit R235 (Mes données, L07-T46) ; le contrôle avant chaque appel reste celui de R235.
+- Version : mvp : D-04 du 07/11/2026 et décision datée 08/11/2026 (03 h) gardées ; décision du responsable du 08/11/2026 (libre-service).
+- État : à faire
+- Lot : L07
+- Cahier : EX-RG-06, EX-RG-07 ; complément à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Ma mise en service › Aide de l'IA
+
+### R259 : limites contre les abus du libre-service
+- **Étant donné** la page « Créer mon compte » ouverte à tous
+- **Quand** elle est sollicitée trop souvent, par un robot ou pour enchaîner les essais
+- **Alors** l'adresse e-mail est vérifiée (R253) ; les inscriptions sont freinées par adresse réseau (empreinte avec clé de période, jamais l'adresse en clair, W-15), par adresse e-mail et en tout par jour (`LS_CADENCE_INSCRIPTIONS`), et les liens envoyés sont plafonnés par jour (`LS_LIENS_PAR_JOUR`) ; les compteurs sont lus dans les demandes et leurs événements en ajout seul, jamais tenus en mémoire seulement ; en mode intégré, la console compte avec les valeurs de l'outil et la plus stricte s'applique (DCA-52) ; un CAPTCHA est demandé seulement si la console en fournit un (DCA-45) : l'outil n'ajoute jamais de lui-même un service de CAPTCHA extérieur (ni dépendance, ni sous-traitant nouveaux sans accord) ; sans CAPTCHA, les cadences s'appliquent seules ; un seul essai par SIREN (`LS_ESSAIS_PAR_SIREN`) et un compte par entité (R237) ; au-delà d'une limite : « Trop de demandes depuis votre connexion. Réessayez plus tard. », journal, et Axion prévenu dans la Vue Axion au-delà du plafond du jour ; les réponses ne disent jamais, ni par les mots ni par le temps de réponse (`ATTENTE_REPONSE_INSCRIPTION_MS`), si une adresse ou un SIREN existe déjà (R253) ; usurpation de SIREN : le vrai titulaire écrit à Axion ; une personne d'Axion, avec son deuxième facteur et la référence de la demande écrite, archive le compte contesté sans rien détruire, ce qui libère l'entité, et le geste va au journal ; la Vue Axion montre un signal « identité à vérifier » quand le domaine de l'adresse e-mail ne correspond à aucun site connu de l'entreprise (donnée publique si elle existe, sinon simple information) ; aucun blocage automatique ; un compte en essai suit aussi les plafonds de R200 ; données de recette : une liste fixe de SIREN fictifs, acceptée seulement contre le faux serveur ou en mode essai, refusée en production ; une limite ne vaut jamais « illimité » : chaque valeur reste dans ses bornes (par adresse réseau : 1 à 20 par heure ; en tout : 1 à 500 par jour ; liens : 20 à 2000 par jour), est changée par Axion avec le deuxième facteur et va au journal (R250) ; rien n'est effacé par ces limites.
+- Version : mvp : sécurité d'une page ouverte à tous.
+- Paramètre (08/11/2026) : `LS_CADENCE_INSCRIPTIONS` : 3 par heure et 10 par jour par adresse réseau ; 3 par jour par adresse e-mail ; 50 comptes ouverts par jour en tout ; valeurs provisoires, datées.
+- État : à faire
+- Lot : L07
+- Cahier : à reporter dans le cahier v1.8 ; origine : case du kit « Limites d'essais et d'abus » et décision du responsable du 08/11/2026 (libre-service)
+- Écran : Créer mon compte ; Vue Axion › Libre-service
+
+### R260 : libre-service en mode autonome de repli
+- **Étant donné** l'outil en mode autonome et l'interrupteur allumé
+- **Quand** une personne s'inscrit
+- **Alors** la brique comptes du kit n'est pas changée : `proprietes.yaml` reste en mode « invitation » et le formulaire d'inscription propre du kit reste refusé (R-C1) ; la route d'inscription de l'outil et la route du lien sont les deux seules routes d'API servies sans session, et seulement quand l'interrupteur est allumé ; après les contrôles de R254 et R259, l'outil envoie son propre lien par l'expéditeur du kit ; après le clic et l'acceptation des quatre textes (R255), et pas avant, l'outil crée l'espace et une invitation à usage unique par le chemin d'invitation du kit (L01-T11), suivie aussitôt dans le même navigateur ; la personne devient propriétaire de l'espace, donc Responsable du compte (L01-T11) ; l'essai est un état local posé par le parcours ; aucun paiement en ligne : l'abonnement reste le geste de la Vue Axion (R187), et le libre-service complet n'existe qu'en mode intégré ; tant que la preuve de ce chemin n'est pas passée (création d'un espace par l'outil puis invitation suivie aussitôt de son premier responsable, sur la version figée du kit), le libre-service reste fermé en mode autonome (R252, condition 3) et la recette de R262 dit que sa série autonome n'est pas jouée.
+- Version : mvp : repli derrière les adaptateurs (R230) ; aucune modification de la brique comptes (R177).
+- État : à faire
+- Lot : L07
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Créer mon compte ; Vérifiez votre adresse
+
+### R261 : écrans du libre-service
+- **Étant donné** les 8 écrans du libre-service (Créer mon compte, Vérifiez votre adresse, Inscription refusée, Accepter les conditions, Ma mise en service, Ma mise en service › Aide de l'IA, Mon essai, Vue Axion › Libre-service)
+- **Quand** ils s'affichent
+- **Alors** ils sont pensés téléphone d'abord, en mots simples ; aucun prix, montant ni signe monétaire ; aucun mot technique (R15) ; aucune promesse ni aucun mot de la liste de promesse de R7 ; aucune forme du mot « supprimer » sur Mon essai ; chaque refus donne une sortie (« Vous pouvez nous écrire ») ; clavier, lecteur d'écran et tailles de R19 à R23 ; en mode intégré, Créer mon compte et Vérifiez votre adresse sont servis par la console, et la planche de l'outil sert de modèle donné à la console ; les autres écrans sont ceux de l'outil.
+- Version : mvp : décision du responsable du 08/11/2026 (libre-service).
+- État : à faire
+- Lot : L07
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : les 8 écrans nommés ci-dessus
+
+### R262 : recette du libre-service de bout en bout, avec des données fictives
+- **Étant donné** la version à livrer
+- **Quand** la recette du libre-service tourne, contre le faux serveur de la console et contre l'adaptateur autonome, avec des données fictives seulement
+- **Alors** la série du mode autonome n'est jouée que si la preuve de R260 est passée, et la recette le dit sinon ; interrupteur éteint : chaque route du libre-service refuse, 0 compte créé, 0 e-mail parti, Créer mon compte répond comme une page introuvable ; interrupteur allumé, conditions remplies : le parcours entier passe (créer mon compte, lien, conditions, essai, ma mise en service avec chacun des trois choix de l'IA, outil ouvert, Mon essai, fin d'essai en lecture seule, export possible, 0 donnée détruite) ; chaque refus de R254 et de R259 est joué (NAF 86, NAF 87, droit public, entreprise cessée à l'écran ; SIREN déjà pris et second essai par e-mail seulement ; cadence dépassée, lien rejoué ou expiré) ; une demande abandonnée ne bloque pas une nouvelle demande pour le même SIREN ; l'interrupteur éteint en cours de route ne touche pas un compte ouvert et refuse une demande en cours ; l'interrupteur ne peut être changé par aucun des contextes de non-levée du §1 qui n'a pas la permission `appels-offres-libre-service` ; la date et le résultat de la recette sont lus par R252 (condition 5).
+- Version : mvp : preuve que la porte se ferme et s'ouvre comme écrit.
+- État : à faire
+- Lot : L07
+- Cahier : à reporter dans le cahier v1.8 ; origine : décision du responsable du 08/11/2026 (libre-service)
+- Écran : Sans écran (recette)
 
 ### Domaine : Module de la console
 
@@ -3327,6 +3465,17 @@ Chaque valeur est une constante datée du code (nom entre accents graves), avec 
 | `TOURS_MAX_PAR_ROLE` | 5 | R110 | provisoire |
 | `TAILLE_MAX_CARACTERES_PAR_APPEL` | 50 000 caractères | R111 | provisoire |
 | `DELAI_REVUE_ACCES_JOURS` | 365 jours | R179 | provisoire |
+| `LIBRE_SERVICE_OUVERT` | faux (éteint) | R251 | décision du responsable du 08/11/2026 |
+| `LS_DUREE_ESSAI_JOURS` | 30 jours (bornes 7 à 90) | R256 | provisoire ; aligné sur `essai_jours: 30` du kit |
+| `LS_VALIDITE_LIEN_HEURES` | 24 heures | R253, R260 | provisoire |
+| `LS_CADENCE_INSCRIPTIONS` | 3 par heure et 10 par jour par adresse réseau ; 3 par jour par adresse e-mail ; 50 comptes ouverts par jour en tout (bornes : 1 à 20 par heure ; 1 à 500 par jour) | R259 | provisoire |
+| `LS_ESSAIS_PAR_SIREN` | 1 | R254, R259 | provisoire |
+| `LS_AGE_MAX_RESTAURATION_JOURS` | 35 jours | R252, R257 | provisoire ; égal au délai de `controleEnRetard` (L01-T33) |
+| `LS_RESPONSABLE_TACHES_APRES_COUP` | identifiant d'une personne d'Axion, vide par défaut | R252, R257 | réglage d'instance ; vide = condition 7 non remplie |
+| `LS_LIENS_PAR_JOUR` | 200 liens envoyés par jour en tout (bornes 20 à 2000) | R259 | provisoire |
+| `LS_CONSERVATION_DEMANDES_MOIS` | 12 mois (bornes 3 à 24) ; ensuite archive gelée par un geste d'Axion, jamais d'effacement | R253, R259 | provisoire |
+| `ATTENTE_REPONSE_INSCRIPTION_MS` | 800 millisecondes, temps de réponse fixe du formulaire | R259 | provisoire |
+| `DELAI_REGISTRE_ENTREPRISES_S` | 10 secondes, au-delà l'INSEE est tenue pour en panne | R254 | provisoire |
 
 ## 5. Non fonctionnel
 
@@ -3434,6 +3583,14 @@ Téléphone d'abord pour les écrans nouveaux, mots simples. Noms de la maquette
 | Aide, Mentions (page à créer : dans la maquette, le lien mène à Aide), Plus, Page introuvable | Aide et cadre | R205, R185, R12, R24 |
 | Mise en route (premiers pas, invitation) | Démarrer un compte | R183, R177 |
 | Vue Axion (mise en service, sources, supervision) | Exploitation par Axion, invisible du client | R204, R152, R184 |
+| Créer mon compte (libre-service ; servi par la console en mode intégré) | S'inscrire : identité, SIREN, pouvoir d'engager | R253, R254, R259, R261 |
+| Vérifiez votre adresse (libre-service) | Lien à usage unique, lien expiré | R253, R260 |
+| Inscription refusée (libre-service) | Refus en mots simples, sortie « Vous pouvez nous écrire » | R254, R259 |
+| Accepter les conditions | Textes en entier, une case par texte, versions | R255, R186 |
+| Ma mise en service (libre-service) | Liste remplie par le client, « J'ai tout vérifié : ouvrir mon outil » | R257 |
+| Ma mise en service › Aide de l'IA | Trois choix, accord en ligne, attente de vérification | R258, R235 |
+| Mon essai | Jours restants, après l'essai, « Passer à l'abonnement », aucun prix | R256, R187 |
+| Vue Axion › Libre-service | Interrupteur, conditions, journal, comptes à vérifier | R251, R252, R259 |
 
 ## 9. Erreurs
 
@@ -3504,12 +3661,14 @@ Ce que la personne voit, en au plus 3 phrases, sans mot technique, avec une acti
 - [x] **Limites d'essais et d'abus** : R200.
 - [x] **Une entité juridique par compte ; groupe en V2** : R237, R213.
 - [x] **Volumes et quotas** : R219, R222, R223.
+- [x] **Libre-service derrière un interrupteur éteint par défaut** (inscription, adresse vérifiée, SIREN et NAF contrôlés, conditions acceptées en ligne, essai, limites contre les abus, repli autonome) : R251 à R262.
 
 ### Argent, dates et calendrier
 - [ ] **TVA toujours facturée** : sans objet dans l'outil : l'outil ne facture pas et n'ajoute aucune taxe aux prix de la personne (R207) ; la facturation du client par Axion se fait hors de l'outil (la vente se fait sur devis signé, par le Hub de la console des automatisations ; la brique « vente » du kit n'est pas utilisée).
 - [x] **Montants en centimes entiers** : R207.
 - [x] **Dates en heure universelle, affichées en heure de Paris** : R25, R129.
 - [x] **Jours fériés français** : R81.
+- [x] **Paiement en libre-service** : domaine de la console ; l'outil ne montre aucun prix, n'encaisse rien et lit l'état du contrat (R256).
 - [ ] **Facture électronique** : sans objet dans l'outil (pas de facture émise par l'outil) ; à confirmer par l'expert-comptable pour la facturation d'Axion.
 
 ### E-mails
@@ -3561,6 +3720,7 @@ Ce que la personne voit, en au plus 3 phrases, sans mot technique, avec une acti
 - **W-16** décidée le 08/11/2026 : ClamAV dans un service séparé (conteneur à part, appelé par une interface, jamais copié dans le code de l'outil) ; repli « Analyse indisponible : fichier mis en attente », tracé (R170).
 - **D-72** décidée le 08/11/2026 : archive gelée 10 ans après la fermeture du compte (D-72, décision du 08/11/2026 : valeur provisoire datée, à confirmer par une source officielle citée ; la durée de prescription applicable sera citée depuis le texte officiel dans le registre (NON VÉRIFIÉ ici) ; la durée de 10 ans est un choix prudent du responsable) (R194).
 - **R4** délai d'annulation d'une suppression : 14 jours, valeur provisoire datée dans la table de paramètres (08/11/2026).
+- **Libre-service** décidé le 08/11/2026 : « Je veux l'inscription en libre-service, prête tout de suite, pour pouvoir l'allumer le jour où je le souhaite. » : libre-service prêt, interrupteur `LIBRE_SERVICE_OUVERT` éteint par défaut, « sur devis » reste le mode par défaut (R251 à R262).
 - **R189** ordre d'architecture du 08/11/2026 (01 h 00) : module de la console, mode autonome en repli derrière des adaptateurs, faux serveur ; il remplace la ligne « autonome d'abord » de 00 h 40.
 
 ## Décisions datées
