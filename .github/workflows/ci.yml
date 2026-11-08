@@ -111,6 +111,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm tsc --noEmit
       - run: pnpm exec eslint . --max-warnings=0
       - name: Tests de la page d'avancement
