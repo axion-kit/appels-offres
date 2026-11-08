@@ -1,10 +1,13 @@
 import { defineConfig, devices } from "@playwright/test";
 
+// En CI, l'étape « pnpm build » a déjà construit l'outil : le serveur d'essai ne fait que démarrer (une construction de moins).
+const commande = process.env.CI ? "pnpm start --port 3100" : "pnpm build && pnpm start --port 3100";
+
 export default defineConfig({
   testDir: "e2e",
   forbidOnly: !!process.env.CI,
   webServer: {
-    command: "pnpm build && pnpm start --port 3100",
+    command: commande,
     url: "http://localhost:3100",
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
