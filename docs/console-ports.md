@@ -316,7 +316,7 @@ export type FournisseurIa = PortIa; // un seul type : L05-T02 le réexporte, auc
 ```
 
 Comportement :
-1. Le modèle demandé est le **seul** code Claude retenu de la liste des modèles admis de la console (code relevé par L00-T22 dans `docs/preuve-passerelle-console.md (à créer par L00-T22)`, lu dans la liste des modèles admis du dépôt public de la console ; le choix du code est demandé à la console) ; jamais un autre modèle en repli.
+1. Le modèle demandé est le **seul** code Claude retenu de la liste des modèles admis de la console (code relevé par L00-T22 dans `docs/preuve-passerelle-console.md` (à créer par L00-T22), lu dans la liste des modèles admis du dépôt public de la console ; le choix du code est demandé à la console) ; jamais un autre modèle en repli.
 2. Avant tout appel : `PortRegistre.refusHorsUe(ctx.clientId)` ; `true` → `hors_ue_refuse`, sans appel.
 3. Mode console : l'appel passe par l'interface `PasserelleIa` de la console (`completer({ modele, entree })` rend `texte`, `jetons`, `coutIaMicroCentimes`), **dans une étape de tâche**, jamais depuis le navigateur. Tant que ce contrat n'a qu'un texte d'entrée, l'adaptateur (L05-T21) met la consigne et le texte reçu de part et d'autre d'une frontière tirée au hasard à chaque appel, et échappe le texte reçu (protection plus faible, NON PROUVÉE).
 4. Aucune clé de fournisseur dans l'outil en mode console : le démarrage est refusé si une variable de clé d'IA est présente. En mode autonome : démarrage refusé en production sans clé ; aucun jeton d'abonnement lu.
