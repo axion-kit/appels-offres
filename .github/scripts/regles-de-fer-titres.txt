@@ -1,0 +1,270 @@
+L00-T22	R235 — sans preuve datée et sourcée, aucun modèle n'est noté route UE
+L01-T01	R181 — [fer 20] l'espace vient de la session, jamais de la requête
+L01-T01	R181 — changer le client dans la requête est refusé : le client vient seulement de la session signée ou de l'adresse de dépôt [fer 20]
+L01-T04	R181 — [fer 20] tout index unique et toute clé étrangère d'une table du client portent espace_id
+L01-T05	R181 — [fer 20] le compte de l'espace A ne lit rien de l'espace B même avec son identifiant
+L01-T08	R3 — [fer 7] archiver garde la donnée et la trace qui, quand, pourquoi
+L01-T08	R3 — [fer 7] aucun UPDATE ne vide ni n'écrase une colonne de contenu sans créer une nouvelle version
+L01-T08	R3 — [fer 7] aucun effacement hors des points de la liste fermée
+L01-T09	R178 — [fer 16] chaque rôle et chaque action sont essayés sur la fonction serveur
+L01-T09	R178 — [fer 16] la matrice n'a aucune action qui lève une règle de fer, pour aucun rôle
+L01-T09	R2 — aucun rôle d'Axion de test (relecteur, administrateur, support) ne peut confirmer l'envoi, lever un point bloquant ni désactiver une règle de fer [fer 2]
+L01-T10	R122 — [fer 9] le dirigeant doit d'abord être ajouté comme personne habilitée
+L01-T12	R180 — [fer 9] sans second facteur de moins de 5 minutes, Je confirme l'envoi répond reauthentification_requise
+L01-T12	R180 — aucun rôle d'Axion ne remet à zéro un deuxième facteur [fer 16]
+L01-T13	R125 — [fer 2] une requête vers une plateforme de dépôt est refusée
+L01-T13	R155 — [fer 21] une méthode d'écriture vers un site d'acheteur est refusée
+L01-T16	R3 — [fer 7] un objet de l'entrepôt n'est jamais réécrit sous la même clé
+L01-T21	R119 — en lecture seule, une confirmation donnée après le passage en lecture seule ne se déclare pas
+L01-T21	R143 — en lecture seule, noter un résultat passe et est inscrit au journal
+L01-T21	R187 — [fer 2] en lecture seule, seuls les 5 gestes de trace passent et une confirmation d'envoi est refusée
+L01-T21	R187 — [fer 2] une date de confirmation venue de la requête est ignorée, la date de la base fait foi
+L01-T21	R187 — en lecture seule, une confirmation donnée avant se déclare encore
+L01-T21	R187 — l'état voulu lu sur le port de la console commande la lecture seule
+L01-T21	R187 — un espace suspendu lit et exporte mais n'écrit plus, hors des 5 gestes de trace
+L01-T21	R187 — un geste déclaré qui écrit hors de ses tables est refusé
+L01-T21	R209 — l'arrêt d'urgence coupe l'IA et la veille pour tous et laisse lire et exporter
+L01-T21	R209 — l'arrêt d'urgence de la console coupe aussi l'outil
+L01-T21	R209 — pendant un arrêt d'urgence, les 5 gestes de trace restent permis
+L01-T21	R211 — en lecture seule, noter un dépôt fait en dehors de l'outil passe et est inscrit au journal
+L01-T21	R227 — en lecture seule, importer un courrier de l'acheteur passe
+L01-T22	R249 — un nom d'entreprise avec un script s'affiche comme du texte et n'exécute rien [fer 19]
+L01-T24	R1 — [fer 1] aucun module de ia/ n'importe un module qui envoie un message à un tiers
+L01-T24	R2 — [fer 2] aucune tâche ni IA ne peut atteindre l'envoi
+L01-T24	R2 — aucun chemin de code n'atteint l'envoi sans un identifiant de confirmation unique [fer 2]
+L01-T29	R7 — [fer 17] aucun texte ne promet un résultat
+L01-T29	R7 — [fer 17] chaque mot de la liste des promesses est refusé dans src/app et src/composants, et l'expression du dépôt demandé par l'acheteur, permise par le kit, passe
+L01-T32	R1 — [fer 1] un brouillon non relu ne peut entrer dans un paquet
+L01-T38	R187 — un état voulu de version ancienne est ignoré
+L01-T39	R181 — [fer 20] aucun marqueur de cli_A n'est lu depuis une session du client B
+L01-T39	R181 — [fer 20] le faux de la base ouvre la base du client de la session et refuse un client venu de la requête
+L01-T39	R181 — [fer 20] le faux de la base passe suiteContratBaseModule
+L01-T40	R235 — la fausse passerelle accepte un modèle hors UE même quand le registre refuse (comme la console réelle) : seule la garde de l'outil protège
+L01-T40	R235 — la fausse passerelle refuse un appel hors manifeste et un plafond atteint avec leurs codes
+L01-T42	R1 — [fer 1] le manifeste ne déclare aucun connecteur d'envoi (connecteurs vide)
+L01-T42	R2 — [fer 2] aucune permission ne couvre un envoi automatique : seule appels-offres-confirmer-envoi existe, sans rôle par défaut
+L01-T42	R232 — [fer 15] actionsAutomatiquesAutorisees vaut [] après instancier({})
+L01-T45	R233 — [fer 20] un établissement 1 ne lit rien de l'établissement 2 sans droit
+L01-T46	R3 — quatre lignes d'historique ajoutées de suite sur la même cible restent toutes, dans l'ordre [fer 7]
+L01-T48	R1 — [fer 1] aucune tâche ne déclare d'action automatique
+L01-T54	R187 — lecture_seule_apres_fin et export_apres_fin valent 90 jours en mode autonome, et en mode console seulement avec l'exception acceptée
+L01-T54	R250 — un délai d'annulation de suppression sous 14 jours est refusé [fer 16]
+L01-T61	R181 — [fer 20] l'adaptateur console ouvre la base du client de la session seulement
+L01-T61	R181 — [fer 20] les deux adaptateurs de la base passent suiteContratBaseModule
+L01-T67	R2 — [fer 2] l'adaptateur refuse un destinataire qui n'est pas une personne du compte, et tout acheteur
+L01-T70	R249 — TexteRecu affiche les balises comme du texte et n'insère aucun élément script, img ni iframe [fer 19]
+L01-T70	R249 — un lien javascript: devient un texte inerte [fer 3]
+L01-T70	R249 — une balise script est retirée et son contenu jeté [fer 19]
+L01-T70	R249 — une image distante n'est jamais gardée [fer 19]
+L01-T70	R5 — une phrase d'ordre dans un texte reçu est affichée sans effet [fer 19]
+L01-T70	R6 — un lien reçu n'est actif que par le bouton d'ouverture [fer 3]
+L01-T71	R249 — aucun fichier de src n'insère du HTML brut, hors la feuille des jetons de layout.tsx [fer 19]
+L01-T72	R250 — un seuil d'alerte d'IA à 100 % est refusé [fer 16]
+L01-T72	R250 — un seuil du mode urgence à 0 est refusé [fer 16]
+L01-T72	R250 — une validité de confirmation de 24 heures est refusée [fer 16]
+L01-T73	R250 — seul le responsable du compte change un réglage du compte [fer 16]
+L01-T73	R250 — une demande qui porte forcer ne passe pas une borne [fer 16]
+L01-T79	R180 — l'identifiant de session change à la connexion
+L01-T79	R180 — le cookie de session est HttpOnly, Secure et SameSite=Lax au moins
+L01-T79	R180 — une session de plus de 8 heures est refusée
+L01-T79	R180 — une session sans geste depuis 30 minutes est refusée
+L01-T79	R180 — une écriture venue d'une autre origine est refusée
+L02-T11	R5 — une consigne cachée dans une pièce du client est signalée et n'ajoute aucune référence [fer 19]
+L03-T02	R152 — [fer 8] une source sous N3 n'est jamais dite connectée
+L03-T02	R159 — [fer 23] Proposer une source reste ouvert, même avec 77 sources suivies
+L03-T04	R158 — [fer 15] un compte neuf ne suit aucune source
+L03-T05	R159 — [fer 23] ignorer une proposition ne change rien
+L03-T07	R155 — [fer 21] l'outil n'accepte jamais une condition d'un site à la place du client
+L03-T11	R30 — une phrase de l'annonce ne change jamais le score [fer 19]
+L03-T13	R174 — le même acheteur chez deux clients ne donne aucun signe de l'autre client dans la recherche de doublons [fer 20]
+L03-T13	R32 — [fer 11] l'outil propose de réunir mais ne réunit jamais seul
+L03-T20	R6 — [fer 3] un téléchargement sans personne connectée est refusé
+L03-T33	R5 — [fer 19] une phrase d'ordre dans une annonce ne change ni mot de recherche, ni source, ni état d'annonce
+L03-T33	R5 — une phrase d'ordre ou un texte caché ne change ni le client d'un ajout, ni un prix, ni l'étape d'un dossier [fer 19]
+L03-T36	R1 — [fer 1] aucun déclencheur de veille ne déclare d'action automatique
+L03-T36	R29 — [fer 12] une tâche de veille n'écarte ni ne retient aucune annonce
+L03-T46	R29 — [fer 12] l'outil met de côté mais n'écarte jamais seul
+L03-T49	R159 — le lien d'ajout d'une source reste présent avec 0 ou 77 sources suivies [fer 23]
+L04-T04	R55 — [fer 14] chaque pièce exigée dit sa source
+L04-T04	R57 — [fer 6] une pièce obligatoire du règlement ne peut pas être dite plus demandée
+L04-T06	R58 — [fer 6] une pièce obligatoire absente bloque
+L04-T09	R67 — [fer 4] aucun prix n'est écrit par l'outil
+L04-T09	R67 — [fer 4] aucune case n'est remplie depuis la grille sans geste
+L04-T09	R67 — [fer 4] les formules du fichier de l'acheteur restent identiques
+L04-T09	R67 — [fer 4] une case vide n'est jamais remplie par zéro ni par une moyenne
+L04-T13	R86 — [fer 18] un contexte de l'IA ne peut pas valider un dossier
+L04-T13	R86 — [fer 18] valider ne fait rien partir
+L04-T14	R78 — [fer 3] le fichier agenda ne se télécharge que par un clic
+L04-T28	R122 — [fer 2] aucun compte Axion n'a le bouton Je confirme l'envoi
+L04-T33	R67 — [fer 4] l'outil n'écrit aucun prix pour une variante ou une option
+L04-T37	R58 — [fer 6] une pièce obligatoire tirée du règlement ne passe jamais en facultative, sauf avis rectificatif importé qui le dit
+L04-T37	R59 — [fer 6] reculer la fin de validité d'une pièce exige un nouveau fichier déposé
+L04-T44	R67 — [fer 4] aucune case de prix n'est remplie par l'outil
+L04-T44	R67 — [fer 4] la route refuse un prix écrit par l'outil
+L05-T01	R235 — la table des accords hors UE refuse toute modification et toute suppression
+L05-T07	R1 — [fer 1] aucun rôle de l'IA n'envoie de question, de relance ni d'e-mail
+L05-T07	R1 — [fer 1] le manifeste du module déclare une liste d'actions automatiques vide
+L05-T07	R1 — [fer 1] une réponse de l'IA n'est qu'un brouillon à relire
+L05-T07	R235 — la passerelle refuse tout appel sur un compte où l'IA n'est pas ouverte (ni route UE ni accord) avant d'atteindre le fournisseur
+L05-T10	R235 — sans route Union européenne ni accord du client, la lecture du règlement n'appelle pas l'IA et la liste des pièces se saisit à la main
+L05-T11	R235 — sans route Union européenne ni accord du client, le classement reste fait par les règles et aucun appel d'IA ne part
+L05-T12	R235 — sans route Union européenne ni accord du client, la rédaction se fait à la main : aucun appel d'IA, aucune partie bloquée
+L05-T12	R98 — [fer 22] une référence absente s'écrit à fournir
+L05-T19	R235 — sans route Union européenne ni accord du client, le bouton Demander un brouillon à l'IA est remplacé par le message et la partie reste modifiable
+L05-T20	R235 — un compte sans IA ouverte voit le message et continue à la main
+L05-T22	R235 — aucun repli vers un autre modèle
+L05-T22	R235 — aucune ligne au registre : refus
+L05-T22	R235 — deux lignes du registre dont une refuse : aucune demande ne part
+L05-T22	R235 — en mode console sans table d'accords, le booléen seul ne suffit pas et l'IA reste fermée
+L05-T22	R235 — l'accord révoqué ferme l'IA aussitôt et l'outil marche sans IA
+L05-T22	R235 — refus hors UE : aucune demande ne part et le message est affiché
+L05-T22	R235 — sans preuve datée et sourcée, aucun modèle n'est noté route UE
+L05-T22	R235 — sans route Union européenne, l'IA n'est ouverte qu'avec l'accord écrit du client, daté et attribué à la personne qui l'a recueilli
+L05-T22	R235 — sans route ni accord, l'IA est désactivée pour ce client et aucune demande ne part
+L05-T22	R235 — un modèle servi par une route Union européenne est ouvert sans accord du client
+L05-T24	R1 — [fer 1] aucun cas ne produit autre chose qu'un brouillon
+L05-T25	R1 — [fer 1] l'interrupteur fermé n'appelle jamais l'IA
+L05-T25	R235 — sans route Union européenne ni accord du client, aucun mot n'est proposé et la page des mots marche à la main
+L05-T27	R235 — accord retiré pendant une tâche de trois appels : un seul appel part et la réponse en vol est jetée
+L05-T27	R235 — après le retrait de l'accord, aucun appel ne part et la file est annulée
+L05-T27	R235 — après le retrait, les brouillons faits avant restent marqués à relire
+L05-T27	R235 — la garde de l'outil refuse même quand la fausse passerelle accepterait un modèle hors UE
+L05-T27	R235 — le contrôle est refait avant chaque appel, pas une fois par tâche
+L05-T27	R235 — le retrait chez un client ne ferme pas l'IA d'un autre client
+L05-T27	R235 — sans route UE ni accord écrit, la fausse passerelle reçoit zéro requête
+L05-T27	R235 — une réponse arrivée après le retrait n'est jamais montrée
+L05-T28	R235 — l'accord en vigueur est la dernière ligne et aucune ligne veut dire pas d'accord
+L05-T28	R235 — la personne qui a recueilli ou déposé le document ne peut pas le vérifier
+L05-T28	R235 — un accord dont le document n'est pas déposé dans l'espace est refusé et inscrit au journal
+L05-T28	R235 — un accord non vérifié par une seconde personne d'Axion n'ouvre pas l'IA hors Union européenne
+L05-T28	R235 — un accord sans référence du document signé, sans date ou sans personne qui l'a recueilli est refusé
+L05-T28	R235 — un contributeur ne peut pas retirer l'accord, le responsable du compte le peut et le retrait est au journal
+L05-T28	R235 — un retrait est une nouvelle ligne, jamais une modification
+L05-T30	R1 — [fer 1] la route section enregistre un brouillon de l'IA comme Brouillon de l'IA, jamais comme relu
+L05-T30	R235 — sans route Union européenne ni accord du client, la route section refuse la demande de brouillon
+L06-T04	R119 — [fer 2] un fait nouveau après la confirmation ne refuse pas la déclaration
+L06-T04	R120 — [fer 2] tout est revérifié au clic
+L06-T05	R121 — [fer 2] un double clic ne produit qu'une confirmation
+L06-T05	R2 — [fer 2] la demande d'un mode d'envoi groupé est refusée et tracée
+L06-T09	R132 — [fer 5] l'accusé garde son empreinte d'origine
+L06-T09	R132 — [fer 5] sans accusé contrôlé, l'étape Accusé de réception reçu est refusée
+L06-T11	R125 — [fer 2] le dépôt par l'outil est toujours refusé au MVP
+L06-T12	R235 — sans route Union européenne ni accord du client, le brouillon de question se rédige à la main et se confirme de la même façon
+L06-T19	R181 — [fer 20] un lien de paquet valable ouvert depuis la session d'un autre client est refusé et inscrit au journal (ligne `acces_refuse`)
+L06-T21	R2 — [fer 2] sans case cochée, rien ne part
+L06-T21	R211 — [fer 2] sans confirmation valable, seul Noter un dépôt fait en dehors de l'outil est proposé
+L06-T22	R211 — [fer 2] un dépôt noté en dehors de l'outil ne compte jamais comme une confirmation
+L06-T24	R227 — [fer 19] une consigne cachée dans le courrier est ignorée et signalée
+L06-T26	R130 — [fer 2] le mode urgence ne dépose et ne raccourcit rien
+L06-T27	R119 — [fer 2] J'ai envoyé moi-même est refusé avant la confirmation
+L06-T31	R120 — [fer 2] une case J'ai relu non cochée fait refuser l'appel direct
+L06-T31	R121 — [fer 2] un double clic n'enregistre qu'un envoi
+L07-T02	R161 — [fer 21] aucun mot de passe de plateforme n'est gardé nulle part
+L07-T07	R192 — [fer 10] chaque catégorie dit chez qui elle va
+L07-T08	R187 — en fin de contrat l'export de sortie reste possible pendant la lecture seule
+L07-T09	R4 — [fer 10] une demande de suppression n'efface rien dans l'outil
+L07-T11	R187 — [fer 2] les gestes permis en lecture seule sont exactement GESTES_TRACE_LECTURE_SEULE du socle, et une confirmation d'envoi est refusée
+L07-T11	R187 — chaque geste permis en lecture seule est inscrit au journal
+L07-T11	R187 — en lecture seule, aucune confirmation d'envoi n'est proposée
+L07-T11	R187 — en lecture seule, importer un accusé de réception reste permis
+L07-T11	R187 — la levée de la suspension rétablit les gestes
+L07-T11	R187 — les comptes déclarés passent en pause et l'outil n'en détient aucun secret
+L07-T11	R187 — pendant le délai de grâce d'un impayé, la préparation et la confirmation restent permises
+L07-T11	R187 — un espace suspendu garde la lecture et l'export
+L07-T11	R187 — un gel pour litige suspend la fin de la lecture seule
+L07-T11	R187 — une confirmation donnée avant la suspension se déclare encore
+L07-T11	R187 — une suspension posée pendant une confirmation ouverte refuse le clic
+L07-T11	R187 — veille et tâches de l'IA sont arrêtées hors Essai, Actif et Facture en attente
+L07-T11	R209 — pendant un arrêt, une confirmation donnée avant se déclare encore
+L07-T11	R211 — en lecture seule, noter un dépôt fait en dehors de l'outil reste permis
+L07-T17	R235 — sans route UE ni accord écrit, IA désactivée pour ce client est cochée et la mise en service continue
+L07-T26	R235 — l'essai réel du jeu d'or passe par la même porte : sans route UE ni accord écrit, aucun appel réel
+L07-T28	R181 — [fer 20] NF-1 le marqueur de A n'apparaît jamais chez B en rédaction
+L07-T28	R181 — [fer 20] NF-10 les journaux et les statistiques ne contiennent aucun marqueur d'un autre client
+L07-T28	R181 — [fer 20] NF-11 aucune leçon ne passe de A à B, même avec le même acheteur
+L07-T28	R181 — [fer 20] NF-12 après la restauration d'un client, aucun reste chez les autres
+L07-T28	R181 — [fer 20] NF-13 les e-mails et les consignes d'Axion ne contiennent aucun marqueur d'un autre client
+L07-T28	R181 — [fer 20] NF-2 le marqueur de A n'apparaît jamais chez B en recherche mot pour mot
+L07-T28	R181 — [fer 20] NF-3 un document piégé chez B qui demande les références d'un autre client n'affiche rien et ouvre un incident
+L07-T28	R181 — [fer 20] NF-4 le client ne peut pas être changé dans la requête
+L07-T28	R181 — [fer 20] NF-5 le même document chez A et B donne des traitements séparés
+L07-T28	R181 — [fer 20] NF-6 le même acheteur chez A et B donne des traitements séparés
+L07-T28	R181 — [fer 20] NF-7 un accès du support sans autorisation est refusé
+L07-T28	R181 — [fer 20] NF-8 après la suppression d'un client, aucun reste chez les autres
+L07-T28	R181 — [fer 20] NF-9 rien de ce qui part vers le modèle pendant un dossier de B ne contient de marqueur de A (exact, sans accents, reformulé)
+L07-T28	R181 — [fer 20] aucun export de B ne contient le marqueur de A
+L07-T28	R181 — [fer 20] en mode console, aucun marqueur de A n'est lu depuis une session de B (faux serveur)
+L07-T32	R1 — [fer 1] aucun des 9 contextes ne lève la règle : un brouillon non relu ne part jamais
+L07-T32	R132 — [fer 5] aucun des 9 contextes ne lève la règle : Accusé de réception reçu ne se pose pas sans contrôle
+L07-T32	R178 — [fer 16] CONTEXTES contient les 9 familles, les 4 rôles du client et les 4 rôles d'Axion par leur nom
+L07-T32	R178 — [fer 16] chaque règle de fer 1 à 6 est essayée dans chacun des 9 contextes
+L07-T32	R2 — [fer 2] aucun des 9 contextes ne lève la règle : aucun envoi sans confirmation du client, et aucun des 4 rôles d'Axion ne confirme
+L07-T32	R2 — [fer 2] aucune tâche planifiée ni réponse de l'IA ne crée une confirmation d'envoi
+L07-T32	R204 — [fer 16] la Vue Axion ne lève aucune règle de fer 1 à 6
+L07-T32	R211 — [fer 2] aucun des 9 contextes ne déclare J'ai envoyé moi-même sans confirmation préalable
+L07-T32	R57 — [fer 6] aucun des 9 contextes ne lève la règle : une pièce expirée bloque la confirmation
+L07-T32	R58 — [fer 6] aucun des 9 contextes ne lève la règle : une pièce obligatoire manquante bloque la confirmation
+L07-T32	R58 — [fer 6] aucun des 9 contextes ne lève la règle en passant une pièce obligatoire du règlement en facultative ou en reculant sa fin de validité sans nouveau fichier
+L07-T32	R6 — [fer 3] aucun des 9 contextes ne lève la règle : aucun téléchargement ni lien ouvert sans clic dédié
+L07-T32	R67 — [fer 4] aucun des 9 contextes ne lève la règle : l'outil n'écrit, ne calcule ni n'estime aucun prix
+L07-T35	R189 — la bascule ne se fait jamais sans le geste du responsable
+L07-T35	R230 — la bascule est refusée tant qu'une demande bloquante n'est pas marquée livrée
+L07-T35	R230 — le mode console est refusé tant que la demande à l'équipe de la console (fin de contrat sans destruction) n'est pas notée livrée
+L07-T35	R230 — le transfert d'un client fictif garde toutes les lignes et toutes les empreintes
+L07-T35	R230 — un client qui a aussi la comptabilité reste en mode autonome tant que l'archive par schéma n'est pas livrée
+L07-T36	R187 — sans date de fin, aucun bandeau de fin n'est inventé
+L07-T36	R187 — un état voulu de version ancienne est ignoré
+L07-T37	R187 — aucune suppression n'est proposée après la fin
+L07-T37	R187 — le bandeau de fin nomme les dossiers dont la date limite tombe après
+L07-T43	R158 — [fer 15] aucun des 9 contextes ne lève la règle : aucune source ni le module ne s'active seul pour le client
+L07-T43	R158 — [fer 15] aucune tâche planifiée n'active une source
+L07-T43	R178 — [fer 16] aucun des 9 contextes ne lève une règle de fer avec forcer, lever, ignorerRegle, exception ou role
+L07-T43	R178 — [fer 16] chaque règle de fer 13 à 18 est essayée dans chacun des 9 contextes
+L07-T43	R204 — [fer 16] la Vue Axion ne lève aucune règle de fer 13 à 18
+L07-T43	R232 — [fer 15] aucun des 9 contextes ne remplit actionsAutomatiquesAutorisees
+L07-T43	R250 — [fer 16] aucun réglage porté au-delà de sa borne n'est accepté, par aucun des 9 contextes
+L07-T43	R55 — [fer 14] aucun des 9 contextes ne lève la règle : les pièces attendues viennent du règlement, jamais d'une liste fixe
+L07-T43	R7 — [fer 17] aucun des 9 contextes ne lève la règle : aucune promesse de résultat n'est écrite
+L07-T43	R86 — [fer 18] aucun des 9 contextes ne lève la règle : l'IA ne valide jamais un dossier
+L07-T43	R86 — [fer 18] aucune réponse de l'IA ne pose la validation du dossier
+L07-T45	R187 — après la fin, la lecture et l'export restent ouverts 90 jours
+L07-T45	R187 — au 91e jour après la fin, l'export reste possible
+L07-T45	R187 — aucune suppression n'est proposée
+L07-T45	R187 — avant la fin, le bandeau nomme les dossiers dont la date limite tombe après
+L07-T45	R187 — en mode autonome, ce geste reste dans la Vue Axion
+L07-T45	R187 — en mode console, aucun geste l'essai devient abonnement dans l'outil
+L07-T45	R187 — le bandeau de fin d'abonnement ne contient aucune forme du mot supprimer
+L07-T45	R187 — le délai de lecture seule et d'export est annoncé
+L07-T45	R187 — une fin d'essai pendant une confirmation ouverte laisse la lecture ouverte
+L07-T45	R187 — à la fin de l'essai, la phrase simple s'affiche et la lecture reste ouverte
+L07-T46	R235 — après le retrait, les brouillons déjà faits restent
+L07-T46	R235 — le responsable du compte retire l'accord depuis Mes données et la carte dit IA désactivée
+L07-T46	R235 — un contributeur ne voit pas Retirer mon accord et la route le refuse
+L07-T47	R122 — [fer 9] aucun des 9 contextes ne lève la règle : sans habilitation à déposer ni deuxième facteur actif, personne ne confirme, ni le responsable du compte ni un rôle d'Axion
+L07-T47	R152 — [fer 8] aucun des 9 contextes ne lève la règle : aucune source ne monte d'un niveau sans preuve
+L07-T47	R178 — [fer 16] chaque règle de fer 7 à 12 est essayée dans chacun des 9 contextes
+L07-T47	R180 — [fer 9] la personne qui confirme l'envoi sans deuxième facteur actif ne confirme pas, même par la route
+L07-T47	R192 — [fer 10] aucun des 9 contextes ne masque la page Mes données ni n'y retire une catégorie
+L07-T47	R29 — [fer 12] aucun des 9 contextes ne lève la règle : l'outil n'écarte jamais une annonce à la place de la personne
+L07-T47	R3 — [fer 7] aucun des 9 contextes ne lève la règle : l'outil ne supprime jamais rien de lui-même
+L07-T47	R3 — [fer 7] aucune tâche planifiée n'appelle la suppression ni la purge des données du client
+L07-T47	R32 — [fer 11] aucun des 9 contextes ne lève la règle : un doublon repéré reste montré
+L07-T47	R4 — [fer 10] aucun des 9 contextes ne lève la règle : aucune suppression définitive sans la demande du client
+L07-T48	R110 — aucun des 9 contextes ne lève le plafond de dépense sans accord tracé
+L07-T48	R111 — aucun des 9 contextes n'élargit la liste des champs envoyés à l'IA
+L07-T48	R159 — [fer 23] aucun des 9 contextes ne lève la règle : la liste des sources ne se ferme pas
+L07-T48	R161 — [fer 21] aucun des 9 contextes ne lève la règle : aucun champ mot de passe de plateforme n'est ajouté
+L07-T48	R178 — [fer 16] chaque règle de fer 19 à 23, R110 et R111 est essayée dans chacun des 9 contextes
+L07-T48	R181 — [fer 20] aucun des 9 contextes, même avec un accès support approuvé chez le client A, ne lit une donnée du client B
+L07-T48	R202 — chaque règle de fer 19 à 23, R110 et R111 a son essai nommé dans le fichier
+L07-T48	R233 — [fer 20] un rôle d'un établissement ne lit rien d'un autre établissement, même en accès support
+L07-T48	R235 — aucun des 9 contextes n'ouvre l'IA hors Union européenne sans document signé du client déposé et vérifié par une seconde personne d'Axion ; une ligne d'accord sans document déposé est refusée et inscrite au journal
+L07-T48	R235 — un seul rôle d'Axion ne peut pas ouvrir l'IA hors Union européenne seul
+L07-T48	R249 — [fer 19] aucun des 9 contextes ni réglage n'affiche un texte reçu comme du HTML
+L07-T48	R5 — [fer 19] aucun des 9 contextes ne lève la règle : le signalement d'une consigne cachée reste actif
+L07-T48	R98 — [fer 22] aucun des 9 contextes ne lève la règle : aucune référence n'est écrite sans preuve
+L07-T49	R178 — [fer 16] chaque route de src/app/api qui porte une action d'une règle de fer appelle sa garde
+L07-T49	R178 — [fer 16] chaque titre de .github/scripts/regles-de-fer-titres.txt existe dans un fichier de test
+L07-T49	R178 — [fer 16] toute route d'écriture découverte dans src/app/api refuse le contexte lecture et la commande sans contexte signé, même hors des tableaux
+L07-T49	R178 — [fer 16] une route ajoutée sans ligne dans un tableau des règles de fer fait échouer le test
+L07-T49	R178 — [fer 16] une route sans déclaration reglesDeFer fait échouer le test
